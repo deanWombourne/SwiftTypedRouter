@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftTypedRouter
 
 struct HomeView: View {
 
@@ -18,7 +19,7 @@ struct HomeView: View {
             Spacer()
             Text("Hello World")
             Spacer()
-            NavigationLink(destination: router.view("list")) {
+            NavigationLink(destination: router.view(.productList)) {
                 Text("See a List")
             }
             Spacer()

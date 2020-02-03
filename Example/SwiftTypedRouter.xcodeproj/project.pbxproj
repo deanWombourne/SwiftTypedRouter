@@ -14,7 +14,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		A05B3DC923E8D91600D22E32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DC823E8D91600D22E32 /* SceneDelegate.swift */; };
 		A05B3DCB23E8D92400D22E32 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DCA23E8D92400D22E32 /* HomeView.swift */; };
-		A05B3DD323E8DEC600D22E32 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DD223E8DEC600D22E32 /* ListView.swift */; };
+		A05B3DD423E8E3F500D22E32 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DD223E8DEC600D22E32 /* ListView.swift */; };
 		C841B439E9E9DAB9DAF621F7 /* Pods_SwiftTypedRouter_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25550630723CC6014001874 /* Pods_SwiftTypedRouter_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +83,6 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				A05B3DD223E8DEC600D22E32 /* ListView.swift */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for SwiftTypedRouter */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -111,6 +110,7 @@
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				A05B3DC823E8D91600D22E32 /* SceneDelegate.swift */,
 				A05B3DCA23E8D92400D22E32 /* HomeView.swift */,
+				A05B3DD223E8DEC600D22E32 /* ListView.swift */,
 			);
 			name = "Example for SwiftTypedRouter";
 			path = SwiftTypedRouter;
@@ -333,7 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A05B3DD323E8DEC600D22E32 /* ListView.swift in Sources */,
+				A05B3DD423E8E3F500D22E32 /* ListView.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				A05B3DCB23E8D92400D22E32 /* HomeView.swift in Sources */,
 				A05B3DC923E8D91600D22E32 /* SceneDelegate.swift in Sources */,

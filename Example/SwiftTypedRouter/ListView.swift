@@ -9,6 +9,19 @@
 import Foundation
 import SwiftUI
 
+import struct SwiftTypedRouter.Path
+import SwiftTypedRouter
+
+extension Template {
+
+    static let productList = TemplateFactory.start().path("list").template()
+}
+
+extension Path {
+
+    static let productList = Template.productList.path()
+}
+
 struct ListView: View {
 
     var body: some View {

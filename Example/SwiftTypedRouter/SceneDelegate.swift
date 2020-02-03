@@ -17,6 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var router: Router = {
         let router = Router()
 
+        router.add(Template.productList) {
+            ListView()
+        }
+
         return router
     }()
 
@@ -67,7 +71,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-
