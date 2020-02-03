@@ -1,0 +1,16 @@
+PODS:
+  - SwiftTypedRouter (0.1.0)
+
+DEPENDENCIES:
+  - SwiftTypedRouter (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftTypedRouter:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftTypedRouter: 77ba09ca1451e1a0d6a3d79b5666024cf41af582
+
+PODFILE CHECKSUM: 23ba365d2ab89c9dfa67a61fa3fd9bd9fb6fc319
+
+COCOAPODS: 1.8.4

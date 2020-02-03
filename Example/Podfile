@@ -1,4 +1,5 @@
 use_frameworks!
+platform :ios, '13'
 
 target 'SwiftTypedRouter_Example' do
   pod 'SwiftTypedRouter', :path => '../'
