@@ -18,17 +18,19 @@ struct HomeView: View {
             Spacer()
             Text("Hello World")
             Spacer()
-            Button(action: { print(self.router) }) {
+            NavigationLink(destination: router.view("list")) {
                 Text("See a List")
             }
             Spacer()
-        }
+        }.navigationBarTitle("Home")
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
 
     static var previews: some View {
-        HomeView()
+        NavigationView {
+            HomeView()
+        }
     }
 }

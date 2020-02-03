@@ -21,6 +21,10 @@ extension Router {
     public func view(_ path: Path) -> AnyView {
         let matching = self.routes.reversed().lazy.compactMap { $0.matches(path.path) }.first
 
+        if matching == nil {
+            print("Failed to match path", path)
+        }
+
         return matching ?? unmatchedRouteView
     }
 
