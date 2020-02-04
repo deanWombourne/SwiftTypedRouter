@@ -29,6 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             Template.productList.path()
         }
 
+        print(router.debugAliases)
+        print(router.debugRoutes)
+
         return router
     }()
 
@@ -37,11 +40,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+        // Create the router _before_ we do anything with a view
+        _ = self.router
+
         // Create the SwiftUI view that provides the window contents.
         let contentView = NavigationView {
             HomeView()
         }
-            .environment(\.router, self.router)
+            .withRouter(self.router)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

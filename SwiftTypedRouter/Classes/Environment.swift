@@ -26,3 +26,11 @@ extension EnvironmentValues {
         }
     }
 }
+
+@available(iOS 13.0, *)
+extension View {
+
+    public func withRouter(_ router: Router) -> some View {
+        return self.environment(\.router, router)
+    }
+}
