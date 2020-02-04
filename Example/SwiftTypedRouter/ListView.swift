@@ -29,7 +29,7 @@ struct ListView: View {
     var body: some View {
         List(self.clients, id:\.self) {
             ListCell(client: $0)
-        }
+        }.navigationBarTitle("Client List")
     }
 }
 

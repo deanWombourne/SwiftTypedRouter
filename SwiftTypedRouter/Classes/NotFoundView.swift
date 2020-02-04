@@ -60,7 +60,7 @@ struct NotFoundView_Previews: PreviewProvider {
         let router = Router()
         router.add(path: "home", action: { Text("Sigh") })
         router.add(path: "product/details/:id", action: { (id: String) in Text("Sigh") })
-        router.alias(Alias<Never>("prodcut/detalis/:id")) { "" }
+        router.alias(Alias<Void>("prodcut/detalis/:id")) { "" }
         return router
     }()
 

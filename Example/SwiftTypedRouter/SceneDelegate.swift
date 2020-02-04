@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             Text("Details for \($0)")
         }
 
-        router.alias(homeButtonTapAlias) { context in
+        router.alias(homeButtonTapAlias) {
             Template.productList.path()
         }
 

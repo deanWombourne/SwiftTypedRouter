@@ -38,10 +38,10 @@ extension Router {
             .map { self.view($0) } ?? unmatchedRouteView(path: alias.identifier)
     }
 
-    public func view(_ alias: Alias<Never>) -> AnyView {
+    public func view(_ alias: Alias<Void>) -> AnyView {
         return aliases
             .first { $0.identifier == alias.identifier }?
-            .apply("")
+            .apply(())
             .map { self.view($0) } ?? unmatchedRouteView(path: alias.identifier)
     }
 }
@@ -92,7 +92,7 @@ extension Router {
         self.aliases.append(AnyAlias(alias, apply))
     }
 
-    public func alias(_ alias: Alias<Never>, apply: @escaping () -> Path?) {
+    public func alias(_ alias: Alias<Void>, apply: @escaping () -> Path?) {
         if let index = self.aliases.firstIndex(where: { $0.identifier == alias.identifier }) {
             aliases.remove(at: index)
         }
@@ -182,9 +182,11 @@ extension Router {
                     Text(wrapping.identifier)
                         .font(Font.body.weight(.semibold))
                         .fixedSize(horizontal: false, vertical: false)
-                    Text("<\(String(describing: C.self))>")
-                        .font(.body)
-                        .fixedSize(horizontal: true, vertical: false)
+                    if C.self != Void.self {
+                        Text("<\(String(describing: C.self))>")
+                            .font(.body)
+                            .fixedSize(horizontal: true, vertical: false)
+                    }
                 }
                     .fixedSize(horizontal: true, vertical: false)
                     .eraseToAnyView()

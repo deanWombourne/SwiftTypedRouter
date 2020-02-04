@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import SwiftTypedRouter
 
-let homeButtonTapAlias = Alias<Never>("home.button.tap")
+let homeButtonTapAlias = Alias<Void>("home.button.tap")
 
 struct HomeView: View {
 
