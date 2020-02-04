@@ -6,9 +6,9 @@ import SwiftUI
 @available(iOS 13.0, *)
 public class Router {
 
-    private var routes: [AnyRoute] = []
+    internal private(set) var routes: [AnyRoute] = []
 
-    private var aliases: [AnyAlias] = []
+    internal private(set) var aliases: [AnyAlias] = []
 
     public init() { }
 }
@@ -16,7 +16,9 @@ public class Router {
 @available(iOS 13.0, *)
 extension Router {
 
-    private var unmatchedRouteView: AnyView { Text("Oh snap, no route matches").eraseToAnyView() }
+    private func unmatchedRouteView(path: String) -> AnyView {
+        NotFoundView(path: path, router: self).eraseToAnyView()
+    }
 
     public func view(_ path: Path) -> AnyView {
         let matching = self.routes.reversed().lazy.compactMap { $0.matches(path.path) }.first
@@ -25,7 +27,7 @@ extension Router {
             print("[Router] Failed to match path '\(path)'")
         }
 
-        return matching ?? unmatchedRouteView
+        return matching ?? unmatchedRouteView(path: path.path)
     }
 
     public func view<C>(_ alias: Alias<C>, context: C) -> AnyView {
@@ -33,14 +35,14 @@ extension Router {
         return aliases
             .first { $0.identifier == alias.identifier }?
             .apply(context)
-            .map { self.view($0) } ?? unmatchedRouteView
+            .map { self.view($0) } ?? unmatchedRouteView(path: alias.identifier)
     }
 
     public func view(_ alias: Alias<Never>) -> AnyView {
         return aliases
             .first { $0.identifier == alias.identifier }?
             .apply("")
-            .map { self.view($0) } ?? unmatchedRouteView
+            .map { self.view($0) } ?? unmatchedRouteView(path: alias.identifier)
     }
 }
 
@@ -101,12 +103,14 @@ extension Router {
 @available(iOS 13.0, *)
 extension Router {
 
-    fileprivate struct AnyRoute: CustomStringConvertible {
+    struct AnyRoute: CustomStringConvertible {
         let description: String
+        let debugView: () -> AnyView
         let matches: (String) -> AnyView?
 
         init<V: View>(template: Template.T0, action: @escaping () -> V) {
             self.description = Self.createDescription(template: template.template, outputType: V.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self)
             self.matches = { toMatch in
                 guard template.matcher(toMatch) != nil else { return nil }
                 return action().eraseToAnyView()
@@ -115,6 +119,7 @@ extension Router {
 
         init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
             self.matches = { (toMatch: String) in
                 guard let matches = template.matcher(toMatch) else { return nil }
                 return action(matches).eraseToAnyView()
@@ -123,6 +128,7 @@ extension Router {
 
         init<A, B, V: View>(template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self)
             self.matches = { (toMatch: String) in
                 guard let matches = template.matcher(toMatch) else { return nil }
                 return action(matches.0, matches.1).eraseToAnyView()
@@ -131,6 +137,7 @@ extension Router {
 
         init<A, B, C, V: View>(template: Template.T3<A, B, C>, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self)
             self.matches = { (toMatch: String) in
                 guard let matches = template.matcher(toMatch) else { return nil }
                 return action(matches.0, matches.1, matches.2).eraseToAnyView()
@@ -141,20 +148,47 @@ extension Router {
             let args = args.isEmpty ? " ()" : " (" + args.map { String(describing: $0) }.joined(separator: ", ") + ")"
             return "Route('\(template)'\(args) -> \(outputType))"
         }
+
+        private static func createDebugView(template: String, outputType: Any.Type, args: Any.Type...) -> () -> AnyView {
+            {
+                HStack {
+                    Text(template)
+                        .font(Font.body.weight(.semibold))
+                    Text("(" + args.map { String(describing: $0) }.joined(separator: ", ") + ") -> " + String(describing: outputType.self))
+                        .font(.body)
+                }
+                    .fixedSize(horizontal: true, vertical: false)
+                    .eraseToAnyView()
+            }
+        }
     }
 }
 
 @available(iOS 13.0, *)
 extension Router {
 
-    fileprivate struct AnyAlias: CustomStringConvertible {
+    struct AnyAlias: CustomStringConvertible {
         let identifier: String
         let description: String
+        let debugView: () -> AnyView
         let apply: (Any) -> Path?
 
         init<C>(_ wrapping: Alias<C>, _ map: @escaping (C) -> Path?) {
             self.identifier = wrapping.identifier
             self.description = "Alias<\(C.self)>('\(wrapping.identifier)')"
+
+            self.debugView = {
+                HStack {
+                    Text(wrapping.identifier)
+                        .font(Font.body.weight(.semibold))
+                        .fixedSize(horizontal: false, vertical: false)
+                    Text("<\(String(describing: C.self))>")
+                        .font(.body)
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+                    .fixedSize(horizontal: true, vertical: false)
+                    .eraseToAnyView()
+            }
 
             self.apply = { context in
                 guard let context = context as? C else { return nil }

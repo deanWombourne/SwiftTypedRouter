@@ -25,6 +25,10 @@ struct HomeView: View {
                 Text("See a List")
             }
             Spacer()
+            NavigationLink(destination: router.view("this/is/not/a/valid/route")) {
+                Text("See the 404")
+            }
+            Spacer()
         }.navigationBarTitle("Home")
     }
 }
