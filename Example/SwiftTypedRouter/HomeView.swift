@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 import SwiftTypedRouter
 
+let homeButtonTapAlias = Alias<Never>("home.button.tap")
+
 struct HomeView: View {
 
     @Environment(\.router) var router
@@ -19,7 +21,7 @@ struct HomeView: View {
             Spacer()
             Text("Hello World")
             Spacer()
-            NavigationLink(destination: router.view(.productList)) {
+            NavigationLink(destination: router.view(homeButtonTapAlias)) {
                 Text("See a List")
             }
             Spacer()

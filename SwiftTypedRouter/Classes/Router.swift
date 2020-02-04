@@ -35,6 +35,13 @@ extension Router {
             .apply(context)
             .map { self.view($0) } ?? unmatchedRouteView
     }
+
+    public func view(_ alias: Alias<Never>) -> AnyView {
+        return aliases
+            .first { $0.identifier == alias.identifier }?
+            .apply("")
+            .map { self.view($0) } ?? unmatchedRouteView
+    }
 }
 
 @available(iOS 13.0, *)
@@ -81,6 +88,13 @@ extension Router {
             aliases.remove(at: index)
         }
         self.aliases.append(AnyAlias(alias, apply))
+    }
+
+    public func alias(_ alias: Alias<Never>, apply: @escaping () -> Path?) {
+        if let index = self.aliases.firstIndex(where: { $0.identifier == alias.identifier }) {
+            aliases.remove(at: index)
+        }
+        self.aliases.append(AnyAlias(alias, { _ in apply() }))
     }
 }
 

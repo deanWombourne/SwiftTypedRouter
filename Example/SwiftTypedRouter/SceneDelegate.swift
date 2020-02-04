@@ -21,6 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ListView()
         }
 
+        router.add(Template.productDetails) {
+            Text("Details for \($0)")
+        }
+
+        router.alias(homeButtonTapAlias) { context in
+            Template.productList.path()
+        }
+
         return router
     }()
 
