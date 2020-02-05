@@ -16,6 +16,7 @@
 		A05B3DD423E8E3F500D22E32 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DD223E8DEC600D22E32 /* ListView.swift */; };
 		A072AA7323EB0D9F0017E2EF /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7123EB0D630017E2EF /* ViewTests.swift */; };
 		A072AA7923EB14870017E2EF /* AliasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7723EB14850017E2EF /* AliasTests.swift */; };
+		A072AA7B23EB14EF0017E2EF /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */; };
 		C841B439E9E9DAB9DAF621F7 /* Pods_SwiftTypedRouter_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25550630723CC6014001874 /* Pods_SwiftTypedRouter_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		A05B3DD223E8DEC600D22E32 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A072AA7123EB0D630017E2EF /* ViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
 		A072AA7723EB14850017E2EF /* AliasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliasTests.swift; sourceTree = "<group>"; };
+		A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		A2AD258E6FD2B2F5D5CD5331 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A96F69C1D85B071ED056817B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B25550630723CC6014001874 /* Pods_SwiftTypedRouter_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTypedRouter_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				A072AA7123EB0D630017E2EF /* ViewTests.swift */,
 				A072AA7723EB14850017E2EF /* AliasTests.swift */,
+				A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			files = (
 				A072AA7923EB14870017E2EF /* AliasTests.swift in Sources */,
 				A072AA7323EB0D9F0017E2EF /* ViewTests.swift in Sources */,
+				A072AA7B23EB14EF0017E2EF /* EnvironmentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

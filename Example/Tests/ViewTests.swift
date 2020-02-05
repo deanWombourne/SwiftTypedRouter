@@ -13,7 +13,7 @@ import SwiftUI
 @testable import SwiftTypedRouter
 
 @available(iOS 13.0, *)
-final class TestView: XCTestCase {
+final class ViewTests: XCTestCase {
 
     func testView_willEraseToAnyView() {
         let view = Text("This isn't AnyView")
