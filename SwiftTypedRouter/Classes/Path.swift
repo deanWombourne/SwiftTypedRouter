@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct Path {
+public struct Path: Hashable {
 
-    let path: String
+    public let path: String
 
     public init(_ path: String) {
         self.path = path

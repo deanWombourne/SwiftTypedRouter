@@ -10,6 +10,13 @@ import UIKit
 import SwiftUI
 import SwiftTypedRouter
 
+private extension Bundle {
+
+    static var isUnderTest: Bool {
+        return self.allBundles.contains { $0.bundlePath.hasSuffix(".xctest") }
+    }
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -37,12 +44,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+
+        // If we are in a test, don't create the UI - it inteferes with test coverage
+        if Bundle.isUnderTest {
+            let window = UIWindow()
+            let controller = UIViewController()
+            controller.view.backgroundColor = .green
+            window.rootViewController = controller
+            window.makeKeyAndVisible()
+            self.window = window
+            return
+        }
+
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
-        // Create the router _before_ we do anything with a view
-        _ = self.router
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = NavigationView {

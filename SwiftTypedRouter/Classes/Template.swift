@@ -21,7 +21,7 @@ public class Template {
         self.template = template
     }
 
-    static func createMatcherExpression(path: String) -> NSRegularExpression? {
+    fileprivate static func createMatcherExpression(path: String) -> NSRegularExpression? {
         let comps = path
             .split(separator: "/")
             .map { (component: Substring) -> Substring in
@@ -40,7 +40,7 @@ public class Template {
         }
     }
 
-    static func createBaseMatcher(path: String) -> (String) -> [String]? {
+    fileprivate static func createBaseMatcher(path: String) -> (String) -> [String]? {
         guard let expression = createMatcherExpression(path: path) else {
             return { _ in return nil }
         }
@@ -51,8 +51,7 @@ public class Template {
 
             return (1..<match.numberOfRanges)
                 .map { match.range(at: $0) }
-                .filter { $0.location != NSNotFound }
-                .map { Range(range: $0, in: candidate) }
+                .compactMap { Range($0, in: candidate) }
                 .map { candidate[$0] }
                 .map(String.init)
         }
