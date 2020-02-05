@@ -12,7 +12,7 @@ import SwiftUI
 @available(iOS 13.0, *)
 extension View {
 
-    @inlinable func eraseToAnyView() -> AnyView {
+    func eraseToAnyView() -> AnyView {
         if let any = self as? AnyView { return any }
         return AnyView(self)
     }
