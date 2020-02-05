@@ -1,5 +1,5 @@
 <%
-/// Create a parameters typeto hold all the logic - just to make the templatey bit more readable. That's more readable, not _actually_ readable :)
+/// Create a parameters type to hold common logic - just to make the templatey bit more readable. That's more readable, not _actually_ readable :)
 struct Parameters {
     let types: [String]
 
