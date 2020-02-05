@@ -56,37 +56,39 @@ extension Router {
 @available(iOS 13.0, *)
 extension Router {
 
-    public func add<V: View>(_ template: Template.T0, action: @escaping () -> V) {
+// sourcery:inline:auto:Router.Add
+    public func add<V: View>(_ template: Template.T0, action: @escaping () -> V)  {
         self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<V: View>(path: String, action: @escaping () -> V)  {
+        self.add(Template.T0(template: path), action: action)
     }
 
     public func add<A, V: View>(_ template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
-    public func add<A, B, V: View>(_ template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
-        self.routes.append(AnyRoute(template: template, action: action))
-    }
-
-    public func add<A, B, C, V: View>(_ template: Template.T3<A, B, C>, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
-        self.routes.append(AnyRoute(template: template, action: action))
-    }
-
-    public func add<V: View>(path: String, action: @escaping () -> V) {
-        self.add(Template.T0(template: path), action: action)
-    }
-
     public func add<A, V: View>(path: String, action: @escaping (A) -> V) where A: LosslessStringConvertible {
         self.add(Template.T1(template: path), action: action)
+    }
+
+    public func add<A, B, V: View>(_ template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
     }
 
     public func add<A, B, V: View>(path: String, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
         self.add(Template.T2(template: path), action: action)
     }
 
+    public func add<A, B, C, V: View>(_ template: Template.T3<A, B, C>, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
     public func add<A, B, C, V: View>(path: String, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
         self.add(Template.T3(template: path), action: action)
     }
+// sourcery:end
 }
 
 @available(iOS 13.0, *)

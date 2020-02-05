@@ -1,0 +1,44 @@
+<%
+/// Create a parameters typeto hold all the logic - just to make the templatey bit more readable. That's more readable, not _actually_ readable :)
+struct Parameters {
+    let types: [String]
+
+    /// i.e. "A, B, C"
+    var typesString: String { self.types.joined(separator: ", ") }
+
+    /// i.e. "<A, B, C>" (or "" if 0 types)
+    var genericTypesString: String { self.isEmpty ? "" : "<" + self.typesString + ">" }
+
+    /// i.e. where A: SomeProtocol, B: SomeProtocol
+    func geneticWhereCondition(restriction: String) -> String {
+        guard !self.isEmpty else { return "" }
+        return "where " + self.types.map { $0 + ": " + restriction }.joined(separator: ", ")
+    }
+
+    var count: Int { self.types.count }
+    var isEmpty: Bool { self.count == 0 }
+}
+
+let allParameters = [
+    [],
+    ["A"],
+    ["A", "B"],
+    ["A", "B", "C"],
+    //["A", "B", "C", "D"],
+    //["A", "B", "C", "D", "E"]
+].map(Parameters.init)
+%>
+
+// sourcery:inline:auto:Router.Add
+<% for parameters in allParameters { -%>
+<% let initial = parameters.isEmpty ? "" : parameters.types.joined(separator: ", ") + ", " -%>
+    public func add<<%=initial -%>V: View>(_ template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<<%=initial -%>V: View>(path: String, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+        self.add(Template.T<%= parameters.count -%>(template: path), action: action)
+    }
+
+<% } -%>
+// sourcery:end
