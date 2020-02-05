@@ -26,13 +26,34 @@ struct Parameters {
     var isEmpty: Bool { self.count == 0 }
 }
 
+extension Array {
+
+    func mapIfNotEmpty<T>(_ map: @escaping (Element) throws -> T) rethrows -> Array<T> {
+        guard !self.isEmpty else { return [] }
+        return try self.map(map)
+    }
+}
+
+extension String {
+
+    func mapIfNotEmpty(_ map: @escaping (String) throws -> String) rethrows -> String {
+        guard !self.isEmpty else { return "" }
+        return try map(self)
+    }
+}
+
 let allParameters = [
     [],
     ["A"],
     ["A", "B"],
     ["A", "B", "C"],
-    //["A", "B", "C", "D"],
-    //["A", "B", "C", "D", "E"]
+    ["A", "B", "C", "D"],
+    ["A", "B", "C", "D", "E"],
+    ["A", "B", "C", "D", "E", "F"],
+    ["A", "B", "C", "D", "E", "F", "G"],
+    ["A", "B", "C", "D", "E", "F", "G", "H"],
+    ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
+    ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
 ].map(Parameters.init)
 %>
 
@@ -76,3 +97,42 @@ init<<%= parameters.initialTypesString -%>V: View>(template: Template.T<%= param
 
 <% } -%>
 //sourcery:end
+
+// sourcery:inline:auto:Template.Subclasses
+<% for parameters in allParameters { -%>
+<%
+let generics = { () -> String in
+    guard !parameters.isEmpty else { return "" }
+    return "<" + parameters.types.map { $0 + ": LosslessStringConvertible" }.joined(separator: ", ") + ">"
+}()
+
+let lowercaseTypesString = parameters.types.map { $0.lowercased() }.joined(separator: ", ")
+
+let pathMethodParameters = parameters.types
+    .map { "_ \($0.lowercased()): \($0)" }
+    .joined(separator: ", ")
+-%>
+
+public final class T<%= parameters.count -%><%= generics -%>: Template, FactoryTemplate {
+    let matcher: (String) -> (<%= parameters.typesString -%>)?
+
+    override public init(template: String) {
+        let baseMatcher = Self.createBaseMatcher(path: template)
+        self.matcher = {
+            guard let matches = baseMatcher($0) else { return nil }
+            guard matches.count >= <%= parameters.count -%> else { return nil }
+<% for (index, type) in parameters.types.enumerated() { -%>
+            guard let <%= type.lowercased() -%> = <%= type -%>(matches[<%= index -%>]) else { return nil }
+<% } -%>
+            return (<%= lowercaseTypesString -%>)
+        }
+
+        super.init(template: template)
+    }
+
+    public func path(<%= pathMethodParameters -%>) -> Path {
+        createPath(template: self.template<%= lowercaseTypesString.mapIfNotEmpty { ", parameters: " + $0 } -%>)
+    }
+}
+<% } -%>
+// sourcery:end

@@ -88,6 +88,62 @@ extension Router {
     public func add<A, B, C, V: View>(path: String, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
         self.add(Template.T3(template: path), action: action)
     }
+
+    public func add<A, B, C, D, V: View>(_ template: Template.T4<A, B, C, D>, action: @escaping (A, B, C, D) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, V: View>(path: String, action: @escaping (A, B, C, D) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible {
+        self.add(Template.T4(template: path), action: action)
+    }
+
+    public func add<A, B, C, D, E, V: View>(_ template: Template.T5<A, B, C, D, E>, action: @escaping (A, B, C, D, E) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, E, V: View>(path: String, action: @escaping (A, B, C, D, E) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible {
+        self.add(Template.T5(template: path), action: action)
+    }
+
+    public func add<A, B, C, D, E, F, V: View>(_ template: Template.T6<A, B, C, D, E, F>, action: @escaping (A, B, C, D, E, F) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, E, F, V: View>(path: String, action: @escaping (A, B, C, D, E, F) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible {
+        self.add(Template.T6(template: path), action: action)
+    }
+
+    public func add<A, B, C, D, E, F, G, V: View>(_ template: Template.T7<A, B, C, D, E, F, G>, action: @escaping (A, B, C, D, E, F, G) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, E, F, G, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible {
+        self.add(Template.T7(template: path), action: action)
+    }
+
+    public func add<A, B, C, D, E, F, G, H, V: View>(_ template: Template.T8<A, B, C, D, E, F, G, H>, action: @escaping (A, B, C, D, E, F, G, H) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, E, F, G, H, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G, H) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible {
+        self.add(Template.T8(template: path), action: action)
+    }
+
+    public func add<A, B, C, D, E, F, G, H, I, V: View>(_ template: Template.T9<A, B, C, D, E, F, G, H, I>, action: @escaping (A, B, C, D, E, F, G, H, I) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, E, F, G, H, I, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G, H, I) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible {
+        self.add(Template.T9(template: path), action: action)
+    }
+
+    public func add<A, B, C, D, E, F, G, H, I, J, V: View>(_ template: Template.T10<A, B, C, D, E, F, G, H, I, J>, action: @escaping (A, B, C, D, E, F, G, H, I, J) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible {
+        self.routes.append(AnyRoute(template: template, action: action))
+    }
+
+    public func add<A, B, C, D, E, F, G, H, I, J, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G, H, I, J) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible {
+        self.add(Template.T10(template: path), action: action)
+    }
 // sourcery:end
 }
 
@@ -155,6 +211,76 @@ extension Router {
             self.matches = { (toMatch: String) in
                 guard let matches = template.matcher(toMatch) else { return nil }
                 return action(matches.0, matches.1, matches.2).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 4 generic types
+        init<A, B, C, D, V: View>(template: Template.T4<A, B, C, D>, action: @escaping (A, B, C, D) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 5 generic types
+        init<A, B, C, D, E, V: View>(template: Template.T5<A, B, C, D, E>, action: @escaping (A, B, C, D, E) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3, matches.4).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 6 generic types
+        init<A, B, C, D, E, F, V: View>(template: Template.T6<A, B, C, D, E, F>, action: @escaping (A, B, C, D, E, F) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 7 generic types
+        init<A, B, C, D, E, F, G, V: View>(template: Template.T7<A, B, C, D, E, F, G>, action: @escaping (A, B, C, D, E, F, G) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 8 generic types
+        init<A, B, C, D, E, F, G, H, V: View>(template: Template.T8<A, B, C, D, E, F, G, H>, action: @escaping (A, B, C, D, E, F, G, H) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6, matches.7).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 9 generic types
+        init<A, B, C, D, E, F, G, H, I, V: View>(template: Template.T9<A, B, C, D, E, F, G, H, I>, action: @escaping (A, B, C, D, E, F, G, H, I) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6, matches.7, matches.8).eraseToAnyView()
+            }
+        }
+
+        // Generated init method for templates with 10 generic types
+        init<A, B, C, D, E, F, G, H, I, J, V: View>(template: Template.T10<A, B, C, D, E, F, G, H, I, J>, action: @escaping (A, B, C, D, E, F, G, H, I, J) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self, J.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self, J.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6, matches.7, matches.8, matches.9).eraseToAnyView()
             }
         }
         // sourcery:end
