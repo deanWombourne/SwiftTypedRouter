@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var router: Router = {
         let router = Router()
 
-        router.add(Template.productList) {
+        router.add(Template.productList) { category in
             ListView()
         }
 
@@ -26,9 +26,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         router.alias(homeButtonTapAlias) {
-            Template.productList.path()
+            Path.productList(category: "hats")
         }
 
+        // Debug the router to the console
         print(router.debugAliases)
         print(router.debugRoutes)
 

@@ -30,6 +30,13 @@ extension Router {
         return matching ?? unmatchedRouteView(path: path.path)
     }
 
+    /// Wrapper around `view(_:Path)` to accept `String`s
+    ///
+    /// Even though Path is `StringLiteralConvertable`, we also want `router.view("a/b/"+id)` to work.
+    public func view(_ string: String) -> AnyView {
+        self.view(Path(string))
+    }
+
     public func view<C>(_ alias: Alias<C>, context: C) -> AnyView {
         // If we match any known aliases then use that template
         return aliases

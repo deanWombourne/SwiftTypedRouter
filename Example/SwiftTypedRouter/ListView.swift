@@ -14,12 +14,12 @@ import SwiftTypedRouter
 
 extension Template {
 
-    static let productList = TemplateFactory.start().path("list").template()
+    static let productList = TemplateFactory.start().path("list").placeholder("category", String.self).template()
 }
 
 extension Path {
 
-    static let productList = Template.productList.path()
+    static func productList(category: String) -> Path { Template.productList.path(category) }
 }
 
 struct ListView: View {
