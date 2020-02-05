@@ -78,5 +78,8 @@ final class EnvironmentTests: XCTestCase {
         window.layoutIfNeeded()
 
         XCTAssertTrue(delegate.router === router)
+
+        // Make the previous window key again
+        UIApplication.shared.windows.dropLast().first?.makeKeyAndVisible()
     }
 }
