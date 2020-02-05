@@ -59,10 +59,12 @@ let allParameters = [
 
 // sourcery:inline:auto:Router.Add
 <% for parameters in allParameters { -%>
+    // Generated add method for templates with <%= parameters.count -%> generic types
     public func add<<%=parameters.initialTypesString -%>V: View>(_ template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with <%= parameters.count -%> generic types
     public func add<<%=parameters.initialTypesString -%>V: View>(path: String, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
         self.add(Template.T<%= parameters.count -%>(template: path), action: action)
     }
@@ -113,6 +115,7 @@ let pathMethodParameters = parameters.types
     .joined(separator: ", ")
 -%>
 
+// Generated template subclass for templates with <%= parameters.count -%> generic types
 public final class T<%= parameters.count -%><%= generics -%>: Template, FactoryTemplate {
     let matcher: (String) -> (<%= parameters.typesString -%>)?
 

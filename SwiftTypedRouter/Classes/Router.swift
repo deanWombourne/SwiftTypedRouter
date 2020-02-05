@@ -57,90 +57,112 @@ extension Router {
 extension Router {
 
 // sourcery:inline:auto:Router.Add
+    // Generated add method for templates with 0 generic types
     public func add<V: View>(_ template: Template.T0, action: @escaping () -> V)  {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 0 generic types
     public func add<V: View>(path: String, action: @escaping () -> V)  {
         self.add(Template.T0(template: path), action: action)
     }
 
+    // Generated add method for templates with 1 generic types
     public func add<A, V: View>(_ template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 1 generic types
     public func add<A, V: View>(path: String, action: @escaping (A) -> V) where A: LosslessStringConvertible {
         self.add(Template.T1(template: path), action: action)
     }
 
+    // Generated add method for templates with 2 generic types
     public func add<A, B, V: View>(_ template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 2 generic types
     public func add<A, B, V: View>(path: String, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
         self.add(Template.T2(template: path), action: action)
     }
 
+    // Generated add method for templates with 3 generic types
     public func add<A, B, C, V: View>(_ template: Template.T3<A, B, C>, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 3 generic types
     public func add<A, B, C, V: View>(path: String, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
         self.add(Template.T3(template: path), action: action)
     }
 
+    // Generated add method for templates with 4 generic types
     public func add<A, B, C, D, V: View>(_ template: Template.T4<A, B, C, D>, action: @escaping (A, B, C, D) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 4 generic types
     public func add<A, B, C, D, V: View>(path: String, action: @escaping (A, B, C, D) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible {
         self.add(Template.T4(template: path), action: action)
     }
 
+    // Generated add method for templates with 5 generic types
     public func add<A, B, C, D, E, V: View>(_ template: Template.T5<A, B, C, D, E>, action: @escaping (A, B, C, D, E) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 5 generic types
     public func add<A, B, C, D, E, V: View>(path: String, action: @escaping (A, B, C, D, E) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible {
         self.add(Template.T5(template: path), action: action)
     }
 
+    // Generated add method for templates with 6 generic types
     public func add<A, B, C, D, E, F, V: View>(_ template: Template.T6<A, B, C, D, E, F>, action: @escaping (A, B, C, D, E, F) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 6 generic types
     public func add<A, B, C, D, E, F, V: View>(path: String, action: @escaping (A, B, C, D, E, F) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible {
         self.add(Template.T6(template: path), action: action)
     }
 
+    // Generated add method for templates with 7 generic types
     public func add<A, B, C, D, E, F, G, V: View>(_ template: Template.T7<A, B, C, D, E, F, G>, action: @escaping (A, B, C, D, E, F, G) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 7 generic types
     public func add<A, B, C, D, E, F, G, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible {
         self.add(Template.T7(template: path), action: action)
     }
 
+    // Generated add method for templates with 8 generic types
     public func add<A, B, C, D, E, F, G, H, V: View>(_ template: Template.T8<A, B, C, D, E, F, G, H>, action: @escaping (A, B, C, D, E, F, G, H) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 8 generic types
     public func add<A, B, C, D, E, F, G, H, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G, H) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible {
         self.add(Template.T8(template: path), action: action)
     }
 
+    // Generated add method for templates with 9 generic types
     public func add<A, B, C, D, E, F, G, H, I, V: View>(_ template: Template.T9<A, B, C, D, E, F, G, H, I>, action: @escaping (A, B, C, D, E, F, G, H, I) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 9 generic types
     public func add<A, B, C, D, E, F, G, H, I, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G, H, I) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible {
         self.add(Template.T9(template: path), action: action)
     }
 
+    // Generated add method for templates with 10 generic types
     public func add<A, B, C, D, E, F, G, H, I, J, V: View>(_ template: Template.T10<A, B, C, D, E, F, G, H, I, J>, action: @escaping (A, B, C, D, E, F, G, H, I, J) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
+    // Generated add method for paths with 10 generic types
     public func add<A, B, C, D, E, F, G, H, I, J, V: View>(path: String, action: @escaping (A, B, C, D, E, F, G, H, I, J) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible {
         self.add(Template.T10(template: path), action: action)
     }

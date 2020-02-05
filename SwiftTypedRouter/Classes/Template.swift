@@ -91,6 +91,7 @@ extension Template {
 
     // sourcery:inline:auto:Template.Subclasses
 
+    // Generated template subclass for templates with 0 generic types
     public final class T0: Template, FactoryTemplate {
         let matcher: (String) -> ()?
 
@@ -110,6 +111,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 1 generic types
     public final class T1<A: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A)?
 
@@ -130,6 +132,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 2 generic types
     public final class T2<A: LosslessStringConvertible, B: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B)?
 
@@ -151,6 +154,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 3 generic types
     public final class T3<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C)?
 
@@ -173,6 +177,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 4 generic types
     public final class T4<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D)?
 
@@ -196,6 +201,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 5 generic types
     public final class T5<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D, E)?
 
@@ -220,6 +226,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 6 generic types
     public final class T6<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D, E, F)?
 
@@ -245,6 +252,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 7 generic types
     public final class T7<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D, E, F, G)?
 
@@ -271,6 +279,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 8 generic types
     public final class T8<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D, E, F, G, H)?
 
@@ -298,6 +307,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 9 generic types
     public final class T9<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D, E, F, G, H, I)?
 
@@ -326,6 +336,7 @@ extension Template {
         }
     }
 
+    // Generated template subclass for templates with 10 generic types
     public final class T10<A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible>: Template, FactoryTemplate {
         let matcher: (String) -> (A, B, C, D, E, F, G, H, I, J)?
 
