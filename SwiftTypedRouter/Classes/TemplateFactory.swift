@@ -10,9 +10,16 @@ import Foundation
 
 // MARK: - Template factory
 
-public class TemplateFactory {
+public class TemplateFactoryStart: CustomStringConvertible {
 
-    public static func start() -> F0 { F0() }
+    public static func start() -> TemplateFactory.FX { TemplateFactory.FX() }
+
+    public var description: String {
+        "TemplateFactory.Start()"
+    }
+}
+
+public class TemplateFactory: TemplateFactoryStart {
 
     public let components: [String]
 
@@ -23,16 +30,9 @@ public class TemplateFactory {
     public func path(_ path: String...) -> Self {
         return Self(self.components + path)
     }
-}
 
-extension TemplateFactory: CustomStringConvertible {
-
-    public var description: String {
-        guard !self.components.isEmpty else {
-            return "TemplateFactory()"
-        }
-
-        return "TemplateFactory.\(type(of: self))(path: \"" + self.components.joined(separator: "/") + "\")"
+    override public var description: String {
+        "TemplateFactory.\(type(of: self))(path: \"" + self.components.joined(separator: "/") + "\")"
     }
 }
 
@@ -52,6 +52,17 @@ extension TemplateFactoryMake {
 }
 
 extension TemplateFactory {
+
+    public final class FX: TemplateFactoryStart {
+
+        public func placeholder<T: LosslessStringConvertible>(_ name: String, _ type: T.Type) -> F1<T> {
+            F1([":" + name])
+        }
+
+        public func path(_ path: String...) -> F0 {
+            F0(path)
+        }
+    }
 
     public final class F0: TemplateFactory, TemplateFactoryMake {
         public typealias TemplateType = Template.T0
