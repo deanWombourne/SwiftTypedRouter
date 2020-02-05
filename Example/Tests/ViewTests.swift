@@ -17,7 +17,7 @@ final class TestView: XCTestCase {
 
     func testView_willEraseToAnyView() {
         let view = Text("This isn't AnyView")
-        let erased = view.eraseToAnyView()
+        let erased: some View = view.eraseToAnyView()
         XCTAssertTrue(erased is AnyView)
     }
 
