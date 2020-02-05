@@ -51,7 +51,6 @@ public class Template {
 
             return (1..<match.numberOfRanges)
                 .map { match.range(at: $0) }
-                .filter { $0.location != NSNotFound }
                 .compactMap { Range($0, in: candidate) }
                 .map { candidate[$0] }
                 .map(String.init)
