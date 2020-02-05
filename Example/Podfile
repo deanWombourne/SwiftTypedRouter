@@ -3,6 +3,7 @@ platform :ios, '13'
 
 target 'SwiftTypedRouter_Example' do
   pod 'SwiftTypedRouter', :path => '../'
+  pod 'Sourcery', '0.17.0'
 
   target 'SwiftTypedRouter_Tests' do
     inherit! :search_paths
