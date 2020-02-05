@@ -1,6 +1,0 @@
-sources: 
-  - ProjectName/Models
-templates:
-  - ProjectName/Templates
-output:
-  ProjectName/Models
