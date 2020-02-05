@@ -117,6 +117,17 @@ extension Router {
         let debugView: () -> AnyView
         let matches: (String) -> AnyView?
 
+        // sourcery:inline:auto:Router.AnyRouteInit
+            init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
+                   self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
+                   self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
+                   self.matches = { (toMatch: String) in
+                       guard let matches = template.matcher(toMatch) else { return nil }
+                       return action(matches).eraseToAnyView()
+                   }
+               }
+        // sourcery:end
+
         init<V: View>(template: Template.T0, action: @escaping () -> V) {
             self.description = Self.createDescription(template: template.template, outputType: V.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self)
@@ -126,14 +137,14 @@ extension Router {
             }
         }
 
-        init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
-            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
-            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
-            self.matches = { (toMatch: String) in
-                guard let matches = template.matcher(toMatch) else { return nil }
-                return action(matches).eraseToAnyView()
-            }
-        }
+//        init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
+//            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
+//            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
+//            self.matches = { (toMatch: String) in
+//                guard let matches = template.matcher(toMatch) else { return nil }
+//                return action(matches).eraseToAnyView()
+//            }
+//        }
 
         init<A, B, V: View>(template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self)

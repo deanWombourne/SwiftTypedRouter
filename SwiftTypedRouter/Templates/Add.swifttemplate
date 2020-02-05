@@ -42,3 +42,14 @@ let allParameters = [
 
 <% } -%>
 // sourcery:end
+
+// sourcery:inline:auto:Router.AnyRouteInit
+    init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
+           self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
+           self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
+           self.matches = { (toMatch: String) in
+               guard let matches = template.matcher(toMatch) else { return nil }
+               return action(matches).eraseToAnyView()
+           }
+       }
+//sourcery:end
