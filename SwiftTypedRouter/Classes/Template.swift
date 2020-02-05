@@ -21,7 +21,7 @@ public class Template {
         self.template = template
     }
 
-    static func createMatcherExpression(path: String) -> NSRegularExpression? {
+    fileprivate static func createMatcherExpression(path: String) -> NSRegularExpression? {
         let comps = path
             .split(separator: "/")
             .map { (component: Substring) -> Substring in
@@ -40,7 +40,7 @@ public class Template {
         }
     }
 
-    static func createBaseMatcher(path: String) -> (String) -> [String]? {
+    fileprivate static func createBaseMatcher(path: String) -> (String) -> [String]? {
         guard let expression = createMatcherExpression(path: path) else {
             return { _ in return nil }
         }
