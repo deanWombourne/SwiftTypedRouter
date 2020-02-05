@@ -6,6 +6,13 @@ struct Parameters {
     /// i.e. "A, B, C"
     var typesString: String { self.types.joined(separator: ", ") }
 
+    /// typeString with a following comma i.e. "A, B, C, " - or, if we don't have any types, ""
+    var initialTypesString: String {
+        let typesString = self.typesString
+        guard !typesString.isEmpty else { return "" }
+        return typesString + ", "
+    }
+
     /// i.e. "<A, B, C>" (or "" if 0 types)
     var genericTypesString: String { self.isEmpty ? "" : "<" + self.typesString + ">" }
 
@@ -31,25 +38,41 @@ let allParameters = [
 
 // sourcery:inline:auto:Router.Add
 <% for parameters in allParameters { -%>
-<% let initial = parameters.isEmpty ? "" : parameters.types.joined(separator: ", ") + ", " -%>
-    public func add<<%=initial -%>V: View>(_ template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+    public func add<<%=parameters.initialTypesString -%>V: View>(_ template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
-    public func add<<%=initial -%>V: View>(path: String, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+    public func add<<%=parameters.initialTypesString -%>V: View>(path: String, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
         self.add(Template.T<%= parameters.count -%>(template: path), action: action)
     }
 
 <% } -%>
 // sourcery:end
 
-// sourcery:inline:auto:Router.AnyRouteInit
-    init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
-           self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
-           self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
-           self.matches = { (toMatch: String) in
-               guard let matches = template.matcher(toMatch) else { return nil }
-               return action(matches).eraseToAnyView()
-           }
-       }
+// sourcery:inline:auto:Router.AnyRoute.Init
+<% for parameters in allParameters { -%>
+<%
+    let argsParameterString = { () -> String in
+        guard !parameters.isEmpty else { return "" }
+        return ", args: " + parameters.types.map { $0 + ".self" }.joined(separator: ", ")
+    }()
+    let matchesString = { () -> String in
+        switch (parameters.count) {
+        case 0: return ""
+        case 1: return "matches"
+        default: return (0..<parameters.count).map { "matches.\($0)" }.joined(separator: ", ")
+        }
+    }()
+-%>
+// Generated init method for templates with <%= parameters.count %> generic types
+init<<%= parameters.initialTypesString -%>V: View>(template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+    self.description = Self.createDescription(template: template.template, outputType: V.self<%= argsParameterString -%>)
+    self.debugView = Self.createDebugView(template: template.template, outputType: V.self<%= argsParameterString -%>)
+    self.matches = { (toMatch: String) in
+        guard let matches = template.matcher(toMatch) else { return nil }
+        return action(<%= matchesString -%>).eraseToAnyView()
+    }
+}
+
+<% } -%>
 //sourcery:end

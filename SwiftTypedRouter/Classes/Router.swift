@@ -117,35 +117,28 @@ extension Router {
         let debugView: () -> AnyView
         let matches: (String) -> AnyView?
 
-        // sourcery:inline:auto:Router.AnyRouteInit
-            init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
-                   self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
-                   self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
-                   self.matches = { (toMatch: String) in
-                       guard let matches = template.matcher(toMatch) else { return nil }
-                       return action(matches).eraseToAnyView()
-                   }
-               }
-        // sourcery:end
-
-        init<V: View>(template: Template.T0, action: @escaping () -> V) {
+        // sourcery:inline:auto:Router.AnyRoute.Init
+        // Generated init method for templates with 0 generic types
+        init<V: View>(template: Template.T0, action: @escaping () -> V)  {
             self.description = Self.createDescription(template: template.template, outputType: V.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self)
-            self.matches = { toMatch in
-                guard template.matcher(toMatch) != nil else { return nil }
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
                 return action().eraseToAnyView()
             }
         }
 
-//        init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
-//            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
-//            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
-//            self.matches = { (toMatch: String) in
-//                guard let matches = template.matcher(toMatch) else { return nil }
-//                return action(matches).eraseToAnyView()
-//            }
-//        }
+        // Generated init method for templates with 1 generic types
+        init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
+            self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
+            self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
+            self.matches = { (toMatch: String) in
+                guard let matches = template.matcher(toMatch) else { return nil }
+                return action(matches).eraseToAnyView()
+            }
+        }
 
+        // Generated init method for templates with 2 generic types
         init<A, B, V: View>(template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self)
@@ -155,6 +148,7 @@ extension Router {
             }
         }
 
+        // Generated init method for templates with 3 generic types
         init<A, B, C, V: View>(template: Template.T3<A, B, C>, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self)
@@ -163,6 +157,7 @@ extension Router {
                 return action(matches.0, matches.1, matches.2).eraseToAnyView()
             }
         }
+        // sourcery:end
 
         private static func createDescription(template: String, outputType: Any.Type, args: Any.Type...) -> String {
             let args = args.isEmpty ? " ()" : " (" + args.map { String(describing: $0) }.joined(separator: ", ") + ")"
