@@ -17,7 +17,7 @@ struct Parameters {
     var genericTypesString: String { self.isEmpty ? "" : "<" + self.typesString + ">" }
 
     /// i.e. where A: SomeProtocol, B: SomeProtocol
-    func geneticWhereCondition(restriction: String) -> String {
+    func genericWhereCondition(restriction: String) -> String {
         guard !self.isEmpty else { return "" }
         return "where " + self.types.map { $0 + ": " + restriction }.joined(separator: ", ")
     }
@@ -60,12 +60,12 @@ let allParameters = [
 // sourcery:inline:auto:Router.Add
 <% for parameters in allParameters { -%>
     // Generated add method for templates with <%= parameters.count -%> generic types
-    public func add<<%=parameters.initialTypesString -%>V: View>(_ template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+    public func add<<%=parameters.initialTypesString -%>V: View>(_ template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.genericWhereCondition(restriction: "LosslessStringConvertible") -%> {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
     // Generated add method for paths with <%= parameters.count -%> generic types
-    public func add<<%=parameters.initialTypesString -%>V: View>(path: String, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+    public func add<<%=parameters.initialTypesString -%>V: View>(path: String, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.genericWhereCondition(restriction: "LosslessStringConvertible") -%> {
         self.add(Template.T<%= parameters.count -%>(template: path), action: action)
     }
 
@@ -88,7 +88,7 @@ let allParameters = [
     }()
 -%>
 // Generated init method for templates with <%= parameters.count %> generic types
-init<<%= parameters.initialTypesString -%>V: View>(template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.geneticWhereCondition(restriction: "LosslessStringConvertible") -%> {
+init<<%= parameters.initialTypesString -%>V: View>(template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.genericWhereCondition(restriction: "LosslessStringConvertible") -%> {
     self.description = Self.createDescription(template: template.template, outputType: V.self<%= argsParameterString -%>)
     self.debugView = Self.createDebugView(template: template.template, outputType: V.self<%= argsParameterString -%>)
     self.matches = { (toMatch: String) in
@@ -139,3 +139,29 @@ public final class T<%= parameters.count -%><%= generics -%>: Template, FactoryT
 }
 <% } -%>
 // sourcery:end
+
+// sourcery:inline:auto:TemplateFactory.Subclasses
+<% for parameters in allParameters { -%>
+<%
+let count = parameters.count
+let isLast = count == allParameters.count-1
+let genericWhereCondition = parameters.types
+    .map { $0 + ": LosslessStringConvertible" }
+    .joined(separator: ", ")
+    .mapIfNotEmpty { "<\($0)>" }
+let nextGenericTypesString = parameters.typesString.mapIfNotEmpty { $0 + ", " } + "Z"
+-%>
+
+// Generated factory subclass for templates with <%= count -%> generic types
+public final class F<%= count -%><%= genericWhereCondition -%>: TemplateFactory, TemplateFactoryMake {
+    public typealias TemplateType = Template.T<%= count -%><%= parameters.genericTypesString %>
+
+<% if !isLast { -%>
+    public func placeholder<Z: LosslessStringConvertible>(_ name: String, _ type: Z.Type) -> F<%= count+1 -%><<%= nextGenericTypesString -%>> {
+        F<%= count+1 -%>(self.components + [":" + name])
+    }
+<% } // if !isLast -%>
+}
+<% } // for -%>
+
+//sourcery:end
