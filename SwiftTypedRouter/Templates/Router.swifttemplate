@@ -42,19 +42,12 @@ extension String {
     }
 }
 
-let allParameters = [
-    [],
-    ["A"],
-    ["A", "B"],
-    ["A", "B", "C"],
-    ["A", "B", "C", "D"],
-    ["A", "B", "C", "D", "E"],
-    ["A", "B", "C", "D", "E", "F"],
-    ["A", "B", "C", "D", "E", "F", "G"],
-    ["A", "B", "C", "D", "E", "F", "G", "H"],
-    ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
-    ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-].map(Parameters.init)
+let allTypeNames = [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+
+let allParameters = (0...allTypeNames.count)
+    .reversed()
+    .map { Array(allTypeNames.dropLast($0)) }
+    .map(Parameters.init)
 %>
 
 // sourcery:inline:auto:Router.Add
