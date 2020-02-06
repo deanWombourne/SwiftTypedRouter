@@ -10,13 +10,9 @@ import Foundation
 
 // MARK: - Template factory
 
-public class TemplateFactoryStart: CustomStringConvertible {
+public class TemplateFactoryStart {
 
     public static func start() -> TemplateFactory.FX { TemplateFactory.FX() }
-
-    public var description: String {
-        "TemplateFactory.Start()"
-    }
 }
 
 public class TemplateFactory: TemplateFactoryStart {
@@ -27,12 +23,9 @@ public class TemplateFactory: TemplateFactoryStart {
         self.components = components
     }
 
-    public func path(_ path: String...) -> Self {
-        return Self(self.components + path)
-    }
-
-    override public var description: String {
-        "TemplateFactory.\(type(of: self))(path: \"" + self.components.joined(separator: "/") + "\")"
+    public func path(_ path: String, _ extraPath: String...) -> Self {
+        let allPathComponents = [path] + extraPath
+        return Self(self.components + allPathComponents)
     }
 }
 
@@ -59,8 +52,9 @@ extension TemplateFactory {
             F1([":" + name])
         }
 
-        public func path(_ path: String...) -> F0 {
-            F0(path)
+        public func path(_ path: String, _ extraPath: String...) -> F0 {
+            let allPathComponents = [path] + extraPath
+            return F0(allPathComponents)
         }
     }
 
