@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private let routerDelegate: RouterDelegate = DebuggingRouterDelegateWrapper()
 
     private lazy var router: Router = {
-        let router = Router()
+        let router = Router(identifier: "MainRouter")
 
         router.delegate = self.routerDelegate
 

@@ -26,7 +26,7 @@ public enum AliasMatchError: Error {
 }
 
 @available(iOS 13.0, *)
-public class Router {
+public class Router: CustomStringConvertible {
 
     internal private(set) var routes: [AnyRoute] = []
 
@@ -34,7 +34,15 @@ public class Router {
 
     public weak var delegate: RouterDelegate?
 
-    public init() { }
+    public let identifier: String?
+
+    public init(identifier: String? = nil) {
+        self.identifier = identifier
+    }
+
+    public var description: String {
+        self.identifier.map { "Router(\($0))" } ?? "Router"
+    }
 }
 
 @available(iOS 13.0, *)

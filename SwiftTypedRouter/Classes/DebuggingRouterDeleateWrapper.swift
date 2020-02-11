@@ -19,7 +19,7 @@ public final class DebuggingRouterDelegateWrapper {
     }
 
     fileprivate func output(_ router: Router, _ vars: String..., separator: String = ",", terminator: String = "\n") {
-        print(self.prefix + " [\(router)] " + vars.joined(separator: separator), terminator: terminator)
+        print(self.prefix + " \(router) " + vars.joined(separator: separator), terminator: terminator)
     }
 }
 
