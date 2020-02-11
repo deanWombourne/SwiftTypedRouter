@@ -34,8 +34,13 @@ public class Router: CustomStringConvertible {
 
     public weak var delegate: RouterDelegate?
 
+    /// A value used to identify this instance of `Router`. This is useful for debugging (it's included in the description when printed to the console).
+    /// It's value doesn't affect the operation of the `Router` at all.
     public let identifier: String?
 
+    /// Create a new (empty) Router with the given identifier.
+    ///
+    /// - parameter identifier: _(optional)_ This parameter can be used to identify the Router being created.
     public init(identifier: String? = nil) {
         self.identifier = identifier
     }
