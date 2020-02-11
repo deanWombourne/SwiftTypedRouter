@@ -1,0 +1,6 @@
+sources:
+    - ../SwiftTypedRouter/Classes
+templates:
+    - ../SwiftTypedRouter/Templates
+output:
+    ../SwiftTypedRouter/Classes
