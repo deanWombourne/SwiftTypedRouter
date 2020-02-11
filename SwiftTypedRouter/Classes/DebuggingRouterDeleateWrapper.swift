@@ -31,14 +31,14 @@ extension DebuggingRouterDelegateWrapper: RouterDelegate {
         self.wrapping?.router(router, willMatchPath: path)
     }
 
-    public func router(_ router: Router, didMatchPath path: Path) {
-        self.output(router, "did match path \(path)")
-        self.wrapping?.router(router, didMatchPath: path)
+    public func router(_ router: Router, didMatchPath path: Path, duration: TimeInterval) {
+        self.output(router, String(format: "did match path \(path) in %.4fs",duration))
+        self.wrapping?.router(router, didMatchPath: path, duration: duration)
     }
 
-    public func router(_ router: Router, failedToMatchPath path: Path) {
-        self.output(router, "failed to match path \(path)")
-        self.wrapping?.router(router, failedToMatchPath: path)
+    public func router(_ router: Router, failedToMatchPath path: Path, duration: TimeInterval) {
+        self.output(router, String(format: "failed to match path \(path) in %.4fs", duration))
+        self.wrapping?.router(router, failedToMatchPath: path, duration: duration)
     }
 
     public func router(_ router: Router, willMatchAliasWithIdentifier identifier: String) {
@@ -46,13 +46,13 @@ extension DebuggingRouterDelegateWrapper: RouterDelegate {
         self.wrapping?.router(router, willMatchAliasWithIdentifier: identifier)
     }
 
-    public func router(_ router: Router, didMatchAliasWithIdentifier identifier: String, forPath path: Path) {
-        self.output(router, "did match alias \(identifier) to path \(path)")
-        self.wrapping?.router(router, didMatchAliasWithIdentifier: identifier, forPath: path)
+    public func router(_ router: Router, didMatchAliasWithIdentifier identifier: String, forPath path: Path, duration: TimeInterval) {
+        self.output(router, String(format: "did match alias \(identifier) to path \(path) in %.4fs", duration))
+        self.wrapping?.router(router, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
     }
 
-    public func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError) {
-        self.output(router, "failed to match alias \(identifier) beacuse \(reason)")
-        self.wrapping?.router(router, failedToMatchAliasWithIdentifier: identifier, reason: reason)
+    public func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError, duration: TimeInterval) {
+        self.output(router, String(format: "failed to match alias \(identifier) beacuse \(reason) in %.4fs", duration))
+        self.wrapping?.router(router, failedToMatchAliasWithIdentifier: identifier, reason: reason, duration: duration)
     }
 }

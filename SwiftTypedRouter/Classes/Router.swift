@@ -8,15 +8,15 @@ public protocol RouterDelegate: class {
 
     func router(_ router: Router, willMatchPath path: Path)
 
-    func router(_ router: Router, didMatchPath path: Path)
+    func router(_ router: Router, didMatchPath path: Path, duration: TimeInterval)
 
-    func router(_ router: Router, failedToMatchPath path: Path)
+    func router(_ router: Router, failedToMatchPath path: Path, duration: TimeInterval)
 
     func router(_ router: Router, willMatchAliasWithIdentifier identifier: String)
 
-    func router(_ router: Router, didMatchAliasWithIdentifier identifier: String, forPath path: Path)
+    func router(_ router: Router, didMatchAliasWithIdentifier identifier: String, forPath path: Path, duration: TimeInterval)
 
-    func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError)
+    func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError, duration: TimeInterval)
 }
 
 @available(iOS 13.0, *)
@@ -40,6 +40,13 @@ public class Router {
 @available(iOS 13.0, *)
 extension Router {
 
+    private func time<T>(work: () -> T) -> (T, TimeInterval) {
+        let start = DispatchTime.now()
+        let result = work()
+        let end = DispatchTime.now()
+        return (result, Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000_000.0)
+    }
+
     private func unmatchedRouteView(path: String) -> AnyView {
         NotFoundView(path: path, router: self).eraseToAnyView()
     }
@@ -47,15 +54,17 @@ extension Router {
     public func view(_ path: Path) -> AnyView {
         self.delegate?.router(self, willMatchPath: path)
 
-        let matches = self.routes.reversed().lazy.compactMap { $0.matches(path.path) }
+        let (potentialMatch, duration) = time {
+            self.routes.reversed().lazy.compactMap({ $0.matches(path.path) }).first
+        }
 
-        guard let match = matches.first else {
+        guard let match = potentialMatch else {
             print("[Router] Failed to match path '\(path)'")
-            self.delegate?.router(self, failedToMatchPath: path)
+            self.delegate?.router(self, failedToMatchPath: path, duration: duration)
             return unmatchedRouteView(path: path.path)
         }
 
-        self.delegate?.router(self, didMatchPath: path)
+        self.delegate?.router(self, didMatchPath: path, duration: duration)
 
         return match
     }
@@ -72,20 +81,41 @@ extension Router {
 
         self.delegate?.router(self, willMatchAliasWithIdentifier: identifier)
 
-        // If we match any known aliases then use that template
-        guard let found = aliases.first(where: { $0.identifier == identifier }) else {
-            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .notFound)
-            return unmatchedRouteView(path: identifier)
+        let (result, duration) = time { () -> (Result<Path, AliasMatchError>) in
+            guard let potential = self.aliases.first(where: { $0.identifier == identifier }) else {
+                return .failure(.notFound)
+            }
+
+            guard let applied = potential.apply(context) else {
+                return .failure(.contextReturnedNil)
+            }
+
+            return .success(applied)
         }
 
-        guard let path = found.apply(context) else {
-            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .contextReturnedNil)
+        switch result {
+        case .failure(let reason):
+            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: reason, duration: duration)
             return unmatchedRouteView(path: identifier)
+        case .success(let path):
+            self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
+            return self.view(path)
         }
-
-        self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path)
-
-        return self.view(path)
+//
+//        // If we match any known aliases then use that template
+//        guard let found = aliases.first(where: { $0.identifier == identifier }) else {
+//            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .notFound)
+//            return unmatchedRouteView(path: identifier)
+//        }
+//
+//        guard let path = found.apply(context) else {
+//            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .contextReturnedNil)
+//            return unmatchedRouteView(path: identifier)
+//        }
+//
+//        self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
+//
+//        return self.view(path)
     }
 
     public func view(_ alias: Alias<Void>) -> AnyView {
