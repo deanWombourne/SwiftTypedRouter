@@ -11,6 +11,7 @@ import SwiftUI
 import SwiftTypedRouter
 
 let homeButtonTapAlias = Alias<Void>("home.button.tap")
+let notFoundAlias = Alias<Void>("this.is.not.a.valid.alias")
 
 struct HomeView: View {
 
@@ -26,7 +27,11 @@ struct HomeView: View {
             }
             Spacer()
             NavigationLink(destination: router.view("this/is/not/a/valid/route")) {
-                Text("See the 404")
+                Text("See the 404 (unmatched path)")
+            }
+            Spacer()
+            NavigationLink(destination: router.view(notFoundAlias)) {
+                Text("See the 404 (unmatched alias)")
             }
             Spacer()
         }.navigationBarTitle("Home")
