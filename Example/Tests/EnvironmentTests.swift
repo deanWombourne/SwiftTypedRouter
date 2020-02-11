@@ -62,7 +62,7 @@ final class EnvironmentTests: XCTestCase {
         testView.delegate = delegate
 
         // Apply our router to the view hierarchy, hopefully replacing the default one :)
-        let view = testView.withRouter(router)
+        let view = testView.environment(\.router, router)
 
         // Get the body - this should trigger the TestView to inform the delegate what it's router is.
         // There are a fair amount of hoops to jump through just to get the view to render :)

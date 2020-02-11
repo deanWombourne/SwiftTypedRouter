@@ -21,8 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let routerDelegate: RouterDelegate = DebuggingRouterDelegateWrapper()
+
     private lazy var router: Router = {
-        let router = Router()
+        let router = Router(identifier: "MainRouter")
+
+        router.delegate = self.routerDelegate
 
         router.add(Template.productList) { category in
             ListView()
