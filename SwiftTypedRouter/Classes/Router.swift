@@ -101,21 +101,6 @@ extension Router {
             self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
             return self.view(path)
         }
-//
-//        // If we match any known aliases then use that template
-//        guard let found = aliases.first(where: { $0.identifier == identifier }) else {
-//            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .notFound)
-//            return unmatchedRouteView(path: identifier)
-//        }
-//
-//        guard let path = found.apply(context) else {
-//            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .contextReturnedNil)
-//            return unmatchedRouteView(path: identifier)
-//        }
-//
-//        self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
-//
-//        return self.view(path)
     }
 
     public func view(_ alias: Alias<Void>) -> AnyView {
