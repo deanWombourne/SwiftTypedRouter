@@ -6,17 +6,17 @@ import SwiftUI
 @available(iOS 13.0, *)
 public protocol RouterDelegate: class {
 
-    func router(_ router: Router, willMatchPath: Path)
+    func router(_ router: Router, willMatchPath path: Path)
 
-    func router(_ router: Router, didMatchPath: Path)
+    func router(_ router: Router, didMatchPath path: Path)
 
-    func router(_ router: Router, failedToMatchPath: Path)
+    func router(_ router: Router, failedToMatchPath path: Path)
 
-    func router(_ router: Router, willMatchAliasWithIdentifier: String)
+    func router(_ router: Router, willMatchAliasWithIdentifier identifier: String)
 
-    func router(_ router: Router, matchedAliasWithIdentifier: String, forPath: Path)
+    func router(_ router: Router, didMatchAliasWithIdentifier identifier: String, forPath path: Path)
 
-    func router(_ router: Router, failedToMatchAliasWithIdentifier: String, reason: AliasMatchError)
+    func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError)
 }
 
 @available(iOS 13.0, *)
@@ -83,16 +83,13 @@ extension Router {
             return unmatchedRouteView(path: identifier)
         }
 
-        self.delegate?.router(self, matchedAliasWithIdentifier: identifier, forPath: path)
+        self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path)
 
         return self.view(path)
     }
 
     public func view(_ alias: Alias<Void>) -> AnyView {
-        return aliases
-            .first { $0.identifier == alias.identifier }?
-            .apply(())
-            .map { self.view($0) } ?? unmatchedRouteView(path: alias.identifier)
+        self.view(alias, context: ())
     }
 }
 
