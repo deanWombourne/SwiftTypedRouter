@@ -18,8 +18,8 @@ struct HomeView: View {
 
     var body: some View {
         VStack {
-            Spacer()
-            Text("Hello World")
+            Spacer().frame(height: 20)
+            Text("Examples").font(.title)
             Spacer()
             NavigationLink(destination: router.view(homeButtonTapAlias)) {
                 Text("See a List")

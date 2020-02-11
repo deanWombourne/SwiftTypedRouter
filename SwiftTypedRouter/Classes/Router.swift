@@ -4,11 +4,35 @@ import SwiftUI
 // MARK: - Router
 
 @available(iOS 13.0, *)
+public protocol RouterDelegate: class {
+
+    func router(_ router: Router, willMatchPath: Path)
+
+    func router(_ router: Router, didMatchPath: Path)
+
+    func router(_ router: Router, failedToMatchPath: Path)
+
+    func router(_ router: Router, willMatchAliasWithIdentifier: String)
+
+    func router(_ router: Router, matchedAliasWithIdentifier: String, forPath: Path)
+
+    func router(_ router: Router, failedToMatchAliasWithIdentifier: String, reason: AliasMatchError)
+}
+
+@available(iOS 13.0, *)
+public enum AliasMatchError: Error {
+    case notFound
+    case contextReturnedNil
+}
+
+@available(iOS 13.0, *)
 public class Router {
 
     internal private(set) var routes: [AnyRoute] = []
 
     internal private(set) var aliases: [AnyAlias] = []
+
+    public weak var delegate: RouterDelegate?
 
     public init() { }
 }
@@ -21,13 +45,19 @@ extension Router {
     }
 
     public func view(_ path: Path) -> AnyView {
-        let matching = self.routes.reversed().lazy.compactMap { $0.matches(path.path) }.first
+        self.delegate?.router(self, willMatchPath: path)
 
-        if matching == nil {
+        let matches = self.routes.reversed().lazy.compactMap { $0.matches(path.path) }
+
+        guard let match = matches.first else {
             print("[Router] Failed to match path '\(path)'")
+            self.delegate?.router(self, failedToMatchPath: path)
+            return unmatchedRouteView(path: path.path)
         }
 
-        return matching ?? unmatchedRouteView(path: path.path)
+        self.delegate?.router(self, didMatchPath: path)
+
+        return match
     }
 
     /// Wrapper around `view(_:Path)` to accept `String`s
@@ -38,11 +68,24 @@ extension Router {
     }
 
     public func view<C>(_ alias: Alias<C>, context: C) -> AnyView {
+        let identifier = alias.identifier
+
+        self.delegate?.router(self, willMatchAliasWithIdentifier: identifier)
+
         // If we match any known aliases then use that template
-        return aliases
-            .first { $0.identifier == alias.identifier }?
-            .apply(context)
-            .map { self.view($0) } ?? unmatchedRouteView(path: alias.identifier)
+        guard let found = aliases.first(where: { $0.identifier == identifier }) else {
+            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .notFound)
+            return unmatchedRouteView(path: identifier)
+        }
+
+        guard let path = found.apply(context) else {
+            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: .contextReturnedNil)
+            return unmatchedRouteView(path: identifier)
+        }
+
+        self.delegate?.router(self, matchedAliasWithIdentifier: identifier, forPath: path)
+
+        return self.view(path)
     }
 
     public func view(_ alias: Alias<Void>) -> AnyView {
