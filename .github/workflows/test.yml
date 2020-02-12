@@ -8,6 +8,7 @@ jobs:
     strategy:
       matrix:
         ios: [ "13.1", "13.2", "13.3" ]
+        phone: [ "iPhone 11" ]
         include:
           - ios: "13.1"
             xcode: "XCode_11.1"
@@ -23,6 +24,6 @@ jobs:
       with:
         workspace: Example/SwiftTypedRouter.xcworkspace
         scheme: SwiftTypedRouter-Example
-        additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=${{ matrix.ios }}'
+        additional_build_params: -destination 'platform=iOS Simulator,name=${{ matrix.phone }},OS=${{ matrix.ios }}'
         additional_lint_params: --private
         use_modern_build_system: true
