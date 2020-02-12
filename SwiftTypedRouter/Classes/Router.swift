@@ -19,9 +19,13 @@ public protocol RouterDelegate: class {
     func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError, duration: TimeInterval)
 }
 
+/// Possible errors when matching against an `Alias`
 @available(iOS 13.0, *)
 public enum AliasMatchError: Error {
+    /// An `Alias` with the supplied identifier was not found
     case notFound
+
+    /// An `Alias` with that identifier was found, but applying the supplied context returned a `nil` `Path`
     case contextReturnedNil
 }
 
@@ -57,13 +61,33 @@ public class Router: CustomStringConvertible {
 @available(iOS 13.0, *)
 extension Router {
 
-    private func time<T>(work: () -> T) -> (T, TimeInterval) {
+    /// Helper method to time an operation
+    ///
+    /// To time adding a set of integers together
+    ///
+    /// ```
+    /// let values = 0..<100_000
+    /// let (sum, duration) = time {
+    ///     values.reduce(0, +)
+    /// }
+    /// ```
+    ///
+    /// Now, `sum` will be 4999950000, and duration will be the time it took (in seconds).
+    ///
+    /// - parameter work: A block containing the operation to be timed.
+    /// - returns: A tuple containing the result of the block, and the duration it took to run.
+    private func time<T>(work: () throws -> T) rethrows -> (T, TimeInterval) {
         let start = DispatchTime.now()
-        let result = work()
+        let result = try work()
         let end = DispatchTime.now()
         return (result, Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000_000.0)
     }
 
+    /// Returns `true` if a path can be matched, `false` otherwise.
+    ///
+    /// - note: Paradoxically, this doesn't guarantee that a path will return a view! The url might contain malformed data for the types expected, or the apply
+    ///         method might not return a view. In those cases, a 404 view will be returned. However, if this method returns `false` then `view(_:)` will
+    ///         definitely return the 404 not found view.
     public func canMatch(_ path: Path) -> Bool {
         self.routes.reversed().contains { $0.canMatch(path.path) }
     }
@@ -120,6 +144,7 @@ extension Router {
         }
     }
 
+    /// Wrapper around `view(_:context:)` to remove the context parameter for `Alias`es with a `Void` context type.
     public func view(_ alias: Alias<Void>) -> AnyView {
         self.view(alias, context: ())
     }
