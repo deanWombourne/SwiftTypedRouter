@@ -11,8 +11,24 @@ import SwiftUI
 @available(iOS 13.0.0, *)
 struct NotFoundView: View {
 
-    let path: String
+    let title: AnyView
     let router: Router
+
+    init(path: Path, router: Router) {
+        self.title = Group {
+            Text("no route matches path")
+            Text(path.path).font(.headline)
+        }.eraseToAnyView()
+        self.router = router
+    }
+
+    init<T>(alias: Alias<T>, router: Router) {
+        self.title = Group {
+            Text("no route matches alias")
+            Text(alias.identifier).font(.headline)
+        }.eraseToAnyView()
+        self.router = router
+    }
 
     private func spacer(_ size: CGFloat) -> some View {
         Spacer().frame(height: size)
@@ -23,7 +39,7 @@ struct NotFoundView: View {
             VStack {
                 Group {
                     Text("404: Not Found").font(.largeTitle)
-                    Text("no route matches ") + Text(path).font(.headline)
+                    title
                 }
                 spacer(40)
                 Group {

@@ -60,10 +60,6 @@ extension Router {
         return (result, Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000_000.0)
     }
 
-    private func unmatchedRouteView(path: String) -> AnyView {
-        NotFoundView(path: path, router: self).eraseToAnyView()
-    }
-
     public func view(_ path: Path) -> AnyView {
         self.delegate?.router(self, willMatchPath: path)
 
@@ -74,7 +70,7 @@ extension Router {
         guard let match = potentialMatch else {
             print("[Router] Failed to match path '\(path)'")
             self.delegate?.router(self, failedToMatchPath: path, duration: duration)
-            return unmatchedRouteView(path: path.path)
+            return NotFoundView(path: path, router: self).eraseToAnyView()
         }
 
         self.delegate?.router(self, didMatchPath: path, duration: duration)
@@ -109,7 +105,7 @@ extension Router {
         switch result {
         case .failure(let reason):
             self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: reason, duration: duration)
-            return unmatchedRouteView(path: identifier)
+            return NotFoundView(alias: alias, router: self).eraseToAnyView()
         case .success(let path):
             self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
             return self.view(path)
