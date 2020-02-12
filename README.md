@@ -2,7 +2,7 @@
 
 ### Strongly typed routing for SwiftUI
 
-[![CI Status](https://img.shields.io/travis/deanWombourne/SwiftTypedRouter.svg?style=flat)](https://travis-ci.org/deanWombourne/SwiftTypedRouter)
+![CI](https://github.com/deanWombourne/SwiftTypedRouter/workflows/CI/badge.svg?branch=master)
 [![Version](https://img.shields.io/cocoapods/v/SwiftTypedRouter.svg?style=flat)](https://cocoapods.org/pods/SwiftTypedRouter)
 [![License](https://img.shields.io/cocoapods/l/SwiftTypedRouter.svg?style=flat)](https://cocoapods.org/pods/SwiftTypedRouter)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftTypedRouter.svg?style=flat)](https://cocoapods.org/pods/SwiftTypedRouter)
