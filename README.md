@@ -46,8 +46,20 @@ Given a path, a router will return a View (or it's own 404 view if it can't find
 
 ```swift
   NavigationLink(destination: router.view("product/list/hats/0")) {
-    Text("See a List")
+    Text("See a list of Hats")
   }
+```
+
+You can also check ahead of time whether the router will match a path or not. NB: This is faster that checking `view(_:) != nil`.
+
+```swift
+if router.canMatch("product/list/hats/0") {
+    NavigationLink(destination: router.view("product/list/hats/0")) {
+      Text("See a list of Hats")
+    }
+} else {
+    Text("No Hats For You")
+}
 ```
 
 ## Advanced Usage
