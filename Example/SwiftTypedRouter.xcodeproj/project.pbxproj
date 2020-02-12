@@ -19,6 +19,7 @@
 		A072AA7B23EB14EF0017E2EF /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */; };
 		A072AA7D23EB1AD10017E2EF /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7C23EB1AD10017E2EF /* PathTests.swift */; };
 		A072AA7F23EB7C100017E2EF /* TemplateFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7E23EB7C100017E2EF /* TemplateFactoryTests.swift */; };
+		A0813F3523F43A4B0033BA1A /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0813F3423F43A4B0033BA1A /* RouterTests.swift */; };
 		C841B439E9E9DAB9DAF621F7 /* Pods_SwiftTypedRouter_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B25550630723CC6014001874 /* Pods_SwiftTypedRouter_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		A072AA7C23EB1AD10017E2EF /* PathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
 		A072AA7E23EB7C100017E2EF /* TemplateFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFactoryTests.swift; sourceTree = "<group>"; };
 		A0813F3323F427ED0033BA1A /* workflows */ = {isa = PBXFileReference; lastKnownFileType = folder; name = workflows; path = ../.github/workflows; sourceTree = "<group>"; };
+		A0813F3423F43A4B0033BA1A /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		A2AD258E6FD2B2F5D5CD5331 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A96F69C1D85B071ED056817B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B25550630723CC6014001874 /* Pods_SwiftTypedRouter_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTypedRouter_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */,
 				A072AA7C23EB1AD10017E2EF /* PathTests.swift */,
 				A072AA7E23EB7C100017E2EF /* TemplateFactoryTests.swift */,
+				A0813F3423F43A4B0033BA1A /* RouterTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				A072AA7323EB0D9F0017E2EF /* ViewTests.swift in Sources */,
 				A072AA7F23EB7C100017E2EF /* TemplateFactoryTests.swift in Sources */,
 				A072AA7D23EB1AD10017E2EF /* PathTests.swift in Sources */,
+				A0813F3523F43A4B0033BA1A /* RouterTests.swift in Sources */,
 				A072AA7B23EB14EF0017E2EF /* EnvironmentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
