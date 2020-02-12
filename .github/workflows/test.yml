@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         ios: [ "13.1", "13.2", "13.3" ]
-        phone: [ "iPhone 11" ]
+        phone: [ "iPhone 11", "iPad Pro" ]
         include:
           - ios: "13.1"
             xcode: "XCode_11.1"
