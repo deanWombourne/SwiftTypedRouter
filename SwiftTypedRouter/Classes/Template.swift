@@ -26,7 +26,7 @@ public class Template {
             .split(separator: "/")
             .map { (component: Substring) -> Substring in
                 guard component.hasPrefix(":") else { return component }
-                return "([\\w])"
+                return "([\\w]+)"
         }
 
         do {

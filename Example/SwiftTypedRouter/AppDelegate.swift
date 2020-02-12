@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-       // routerExamples()
+        routerExamples()
 
         return true
     }
@@ -52,6 +52,8 @@ func routerExamples() {
         }
     }
 
+    print(router.canMatch("product/details/0"))
+
     // Add a route for a predefined template
     router.add(Template.productDetails) { productId in
         Text("Product Details screen for product with id \(productId)")
@@ -81,6 +83,8 @@ func routerExamples() {
     print(router.debugRoutes)
     print(router.debugAliases)
     print("----------")
+
+    print(router.canMatch("product/details/0"))
 }
 
 

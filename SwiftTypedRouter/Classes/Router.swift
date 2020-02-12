@@ -64,6 +64,10 @@ extension Router {
         return (result, Double(end.uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000_000.0)
     }
 
+    public func canMatch(_ path: Path) -> Bool {
+        self.routes.reversed().contains { $0.canMatch(path.path) }
+    }
+
     public func view(_ path: Path) -> AnyView {
         self.delegate?.router(self, willMatchPath: path)
 
@@ -265,13 +269,16 @@ extension Router {
     struct AnyRoute: CustomStringConvertible {
         let description: String
         let debugView: () -> AnyView
+
         let matches: (String) -> AnyView?
+        let canMatch: (String) -> Bool
 
         // sourcery:inline:auto:Router.AnyRoute.Init
         // Generated init method for templates with 0 generic types
         init<V: View>(template: Template.T0, action: @escaping () -> V)  {
             self.description = Self.createDescription(template: template.template, outputType: V.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard template.matcher($0) != nil else { return nil }
                 return action().eraseToAnyView()
@@ -282,6 +289,7 @@ extension Router {
         init<A, V: View>(template: Template.T1<A>, action: @escaping (A) -> V) where A: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches).eraseToAnyView()
@@ -292,6 +300,7 @@ extension Router {
         init<A, B, V: View>(template: Template.T2<A, B>, action: @escaping (A, B) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1).eraseToAnyView()
@@ -302,6 +311,7 @@ extension Router {
         init<A, B, C, V: View>(template: Template.T3<A, B, C>, action: @escaping (A, B, C) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2).eraseToAnyView()
@@ -312,6 +322,7 @@ extension Router {
         init<A, B, C, D, V: View>(template: Template.T4<A, B, C, D>, action: @escaping (A, B, C, D) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3).eraseToAnyView()
@@ -322,6 +333,7 @@ extension Router {
         init<A, B, C, D, E, V: View>(template: Template.T5<A, B, C, D, E>, action: @escaping (A, B, C, D, E) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3, matches.4).eraseToAnyView()
@@ -332,6 +344,7 @@ extension Router {
         init<A, B, C, D, E, F, V: View>(template: Template.T6<A, B, C, D, E, F>, action: @escaping (A, B, C, D, E, F) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5).eraseToAnyView()
@@ -342,6 +355,7 @@ extension Router {
         init<A, B, C, D, E, F, G, V: View>(template: Template.T7<A, B, C, D, E, F, G>, action: @escaping (A, B, C, D, E, F, G) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6).eraseToAnyView()
@@ -352,6 +366,7 @@ extension Router {
         init<A, B, C, D, E, F, G, H, V: View>(template: Template.T8<A, B, C, D, E, F, G, H>, action: @escaping (A, B, C, D, E, F, G, H) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6, matches.7).eraseToAnyView()
@@ -362,6 +377,7 @@ extension Router {
         init<A, B, C, D, E, F, G, H, I, V: View>(template: Template.T9<A, B, C, D, E, F, G, H, I>, action: @escaping (A, B, C, D, E, F, G, H, I) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6, matches.7, matches.8).eraseToAnyView()
@@ -372,6 +388,7 @@ extension Router {
         init<A, B, C, D, E, F, G, H, I, J, V: View>(template: Template.T10<A, B, C, D, E, F, G, H, I, J>, action: @escaping (A, B, C, D, E, F, G, H, I, J) -> V) where A: LosslessStringConvertible, B: LosslessStringConvertible, C: LosslessStringConvertible, D: LosslessStringConvertible, E: LosslessStringConvertible, F: LosslessStringConvertible, G: LosslessStringConvertible, H: LosslessStringConvertible, I: LosslessStringConvertible, J: LosslessStringConvertible {
             self.description = Self.createDescription(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self, J.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self, args: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self, J.self)
+            self.canMatch = { template.matcher($0) != nil }
             self.matches = {
                 guard let matches = template.matcher($0) else { return nil }
                 return action(matches.0, matches.1, matches.2, matches.3, matches.4, matches.5, matches.6, matches.7, matches.8, matches.9).eraseToAnyView()
