@@ -50,7 +50,7 @@ Given a path, a router will return a View (or it's own 404 view if it can't find
   }
 ```
 
-You can also check ahead of time whether the router will match a path or not. NB: This is faster that checking `view(_:) != nil`.
+You can also check ahead of time whether the router will match a path or not. NB: This is faster than checking `view(_:) != nil`
 
 ```swift
 if router.canMatch("product/list/hats/0") {
