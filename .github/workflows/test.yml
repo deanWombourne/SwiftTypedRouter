@@ -5,6 +5,9 @@ on: [push]
 jobs:
   test:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        ios: [ 13, 13.1, 13.2 ]
     steps:
     - uses: actions/checkout@master
     - name: Switch XCode Version
@@ -13,6 +16,6 @@ jobs:
       with:
         workspace: Example/SwiftTypedRouter.xcworkspace
         scheme: SwiftTypedRouter-Example
-        additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.0'
+        additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=${{ matrix.ios }}'
         additional_lint_params: --private
         use_modern_build_system: true
