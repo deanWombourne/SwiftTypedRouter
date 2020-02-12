@@ -7,6 +7,12 @@
 [![License](https://img.shields.io/cocoapods/l/SwiftTypedRouter.svg?style=flat)](https://cocoapods.org/pods/SwiftTypedRouter)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftTypedRouter.svg?style=flat)](https://cocoapods.org/pods/SwiftTypedRouter)
 
+## Goals of this library
+
+- Swift is strongly typed. How strongly typed can we make a routing library?
+- Single location to customise routing
+- Routing should be customisable even when the code running is in another library (i.e. if we have some shared code we should be able to configure it's flow)
+
 ## Installation
 
 It's a cocoapod. Add `pod 'SwiftTypedRouter'` to your podfile.
