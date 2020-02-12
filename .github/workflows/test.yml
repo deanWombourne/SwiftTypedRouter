@@ -18,7 +18,7 @@ jobs:
             ios: 13.3
           - xcode: XCode_11_3
             ios: 13.0
-        - xcode: XCode_11_3
+          - xcode: XCode_11_3
             ios: 13.1
     steps:
     - uses: actions/checkout@master
