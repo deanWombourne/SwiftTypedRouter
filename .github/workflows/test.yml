@@ -7,7 +7,13 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        ios: [ 13, 13.1, 13.2 ]
+        xcode: [ XCode_11, XCode_11_3 ]
+        ios: [ 13.0, 13.1, 13.2, 13.3 ]
+        exclude:
+          - xcode: XCode_11
+            ios: [ 13.1, 13.2, 13.3 ]
+          - xcode: XCode_11_3
+            ios: [ 13.0, 13.1 ]
     steps:
     - uses: actions/checkout@master
     - name: Switch XCode Version
