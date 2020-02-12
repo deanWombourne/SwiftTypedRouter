@@ -15,9 +15,11 @@
 
 ## Installation
 
-It's a cocoapod. Add `pod 'SwiftTypedRouter'` to your podfile.
+It's a cocoapod. Add `pod 'SwiftTypedRouter'` to your podfile. See https://cocoapods.org for more information. Check out the example app in this repo to see this in action as a pod.
 
-Check out the example app in this repo to see this in action.
+You can also just check it out and copy the files into your app if you like.
+
+Carthage / SPM support are issues - feel free to grab them and make a PR ;)
 
 ## Basic use
 
