@@ -7,10 +7,8 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        ios: [ "13.0", "13.1", "13.2", "13.3" ]
+        ios: [ "13.1", "13.2", "13.3" ]
         include:
-          - ios: "13.0"
-            xcode: "XCode_11"
           - ios: "13.1"
             xcode: "XCode_11.1"
           - ios: "13.2"
