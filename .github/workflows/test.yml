@@ -11,5 +11,7 @@ jobs:
       run: sudo xcode-select -s /Applications/Xcode_11.app
     - uses: ty0x2333/cocoapods-action@master
       with:
+        workspace: Example/SwiftTypedRouter.xcworkspace
+        scheme: SwiftTypedRouter-Example
         additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.0'
         additional_lint_params: --private

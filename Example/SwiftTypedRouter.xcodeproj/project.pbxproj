@@ -54,6 +54,7 @@
 		A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		A072AA7C23EB1AD10017E2EF /* PathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
 		A072AA7E23EB7C100017E2EF /* TemplateFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFactoryTests.swift; sourceTree = "<group>"; };
+		A0813F3323F427ED0033BA1A /* workflows */ = {isa = PBXFileReference; lastKnownFileType = folder; name = workflows; path = ../.github/workflows; sourceTree = "<group>"; };
 		A2AD258E6FD2B2F5D5CD5331 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A96F69C1D85B071ED056817B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B25550630723CC6014001874 /* Pods_SwiftTypedRouter_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftTypedRouter_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +164,7 @@
 				B83A76D4D8241A06029B53CB /* SwiftTypedRouter.podspec */,
 				A2AD258E6FD2B2F5D5CD5331 /* README.md */,
 				A96F69C1D85B071ED056817B /* LICENSE */,
+				A0813F3323F427ED0033BA1A /* workflows */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";

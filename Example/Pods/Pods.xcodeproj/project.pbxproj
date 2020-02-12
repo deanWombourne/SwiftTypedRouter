@@ -505,6 +505,40 @@
 			};
 			name = Debug;
 		};
+		140F6B11E195F5AAF2EB01BF0911E78A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C8899416B289087FCE1290D6029542C /* SwiftTypedRouter.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter.modulemap";
+				PRODUCT_MODULE_NAME = SwiftTypedRouter;
+				PRODUCT_NAME = SwiftTypedRouter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		1AF45F362DC9EAD9B19EC2FC04DC12A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -584,6 +618,39 @@
 			};
 			name = Release;
 		};
+		25A366797BC7EB9BC23238DF23EB2120 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C8899416B289087FCE1290D6029542C /* SwiftTypedRouter.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter.modulemap";
+				PRODUCT_MODULE_NAME = SwiftTypedRouter;
+				PRODUCT_NAME = SwiftTypedRouter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		386765988D580ED87EFC42C4758F736D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -643,38 +710,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
-		};
-		578808CA2DFA955825C21F3D11549E9B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C8899416B289087FCE1290D6029542C /* SwiftTypedRouter.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter.modulemap";
-				PRODUCT_MODULE_NAME = SwiftTypedRouter;
-				PRODUCT_NAME = SwiftTypedRouter;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		59AC3FCDBFD0543212B0326E11CAE282 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -783,39 +818,6 @@
 			};
 			name = Release;
 		};
-		86124FB42560EDC4EB92A896523B60EC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C8899416B289087FCE1290D6029542C /* SwiftTypedRouter.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftTypedRouter/SwiftTypedRouter.modulemap";
-				PRODUCT_MODULE_NAME = SwiftTypedRouter;
-				PRODUCT_NAME = SwiftTypedRouter;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		EE9DC286629735ACF8D26D75CFBBFAF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D23ED4367459F60BDA734CE99B4F548 /* Pods-SwiftTypedRouter_Example.debug.xcconfig */;
@@ -857,8 +859,8 @@
 		3EC9D0FDE1BFBC39A8173DA5047403C0 /* Build configuration list for PBXNativeTarget "SwiftTypedRouter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				578808CA2DFA955825C21F3D11549E9B /* Debug */,
-				86124FB42560EDC4EB92A896523B60EC /* Release */,
+				25A366797BC7EB9BC23238DF23EB2120 /* Debug */,
+				140F6B11E195F5AAF2EB01BF0911E78A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
