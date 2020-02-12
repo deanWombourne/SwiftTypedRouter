@@ -11,13 +11,19 @@ jobs:
         ios: [ 13.0, 13.1, 13.2, 13.3 ]
         exclude:
           - xcode: XCode_11
-            ios: [ 13.1, 13.2, 13.3 ]
+            ios: 13.1
+          - xcode: XCode_11
+            ios: 13.2
+          - xcode: XCode_11
+            ios: 13.3
           - xcode: XCode_11_3
-            ios: [ 13.0, 13.1 ]
+            ios: 13.0
+        - xcode: XCode_11_3
+            ios: 13.1
     steps:
     - uses: actions/checkout@master
     - name: Switch XCode Version
-      run: sudo xcode-select -s /Applications/Xcode_11.app
+      run: sudo xcode-select -s /Applications/${{ matrix.xcode }}.app
     - uses: ty0x2333/cocoapods-action@master
       with:
         workspace: Example/SwiftTypedRouter.xcworkspace
