@@ -9,16 +9,10 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftTypedRouter'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of SwiftTypedRouter.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'A strongly typed routing layer for SwiftUI'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A strongly typed routing layer for SwiftUI. Convert paths to Views, and override them per-client app if included in a library.
                        DESC
 
   s.homepage         = 'https://github.com/deanWombourne/SwiftTypedRouter'
@@ -29,6 +23,7 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '13.0'
+  s.swift_versions = [ 4.0, 4.2, 5.0, 5.1 ]
 
   s.source_files = 'SwiftTypedRouter/Classes/**/*'
   
