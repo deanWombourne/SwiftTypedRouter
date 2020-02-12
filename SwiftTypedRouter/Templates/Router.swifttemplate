@@ -84,11 +84,11 @@ let allParameters = (0...allTypeNames.count)
 init<<%= parameters.initialTypesString -%>V: View>(template: Template.T<%= parameters.count -%><%= parameters.genericTypesString -%>, action: @escaping (<%= parameters.typesString -%>) -> V) <%= parameters.genericWhereCondition(restriction: "LosslessStringConvertible") -%> {
     self.description = Self.createDescription(template: template.template, outputType: V.self<%= argsParameterString -%>)
     self.debugView = Self.createDebugView(template: template.template, outputType: V.self<%= argsParameterString -%>)
-    self.matches = { (toMatch: String) in
+    self.matches = {
 <% if parameters.isEmpty { -%>
-        guard template.matcher(toMatch) != nil else { return nil }
+        guard template.matcher($0) != nil else { return nil }
 <% } else { -%>
-        guard let matches = template.matcher(toMatch) else { return nil }
+        guard let matches = template.matcher($0) else { return nil }
 <% } -%>
         return action(<%= matchesString -%>).eraseToAnyView()
     }
