@@ -85,7 +85,11 @@ init<<%= parameters.initialTypesString -%>V: View>(template: Template.T<%= param
     self.description = Self.createDescription(template: template.template, outputType: V.self<%= argsParameterString -%>)
     self.debugView = Self.createDebugView(template: template.template, outputType: V.self<%= argsParameterString -%>)
     self.matches = { (toMatch: String) in
+<% if parameters.isEmpty { -%>
+        guard template.matcher(toMatch) != nil else { return nil }
+<% } else { -%>
         guard let matches = template.matcher(toMatch) else { return nil }
+<% } -%>
         return action(<%= matchesString -%>).eraseToAnyView()
     }
 }

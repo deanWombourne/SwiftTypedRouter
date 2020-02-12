@@ -25,6 +25,8 @@ public enum AliasMatchError: Error {
     case contextReturnedNil
 }
 
+// MARK: Initialisation
+
 @available(iOS 13.0, *)
 public class Router: CustomStringConvertible {
 
@@ -49,6 +51,8 @@ public class Router: CustomStringConvertible {
         self.identifier.map { "Router(\($0))" } ?? "Router"
     }
 }
+
+// MARK: Routing
 
 @available(iOS 13.0, *)
 extension Router {
@@ -116,6 +120,8 @@ extension Router {
         self.view(alias, context: ())
     }
 }
+
+// MARK: Adding routes
 
 @available(iOS 13.0, *)
 extension Router {
@@ -233,6 +239,8 @@ extension Router {
 // sourcery:end
 }
 
+// MARK: Adding aliases
+
 @available(iOS 13.0, *)
 extension Router {
 
@@ -265,7 +273,7 @@ extension Router {
             self.description = Self.createDescription(template: template.template, outputType: V.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self)
             self.matches = { (toMatch: String) in
-                guard let matches = template.matcher(toMatch) else { return nil }
+                guard template.matcher(toMatch) != nil else { return nil }
                 return action().eraseToAnyView()
             }
         }
