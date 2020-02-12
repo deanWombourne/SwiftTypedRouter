@@ -89,7 +89,15 @@ extension Router {
     ///         method might not return a view. In those cases, a 404 view will be returned. However, if this method returns `false` then `view(_:)` will
     ///         definitely return the 404 not found view.
     public func canMatch(_ path: Path) -> Bool {
-        self.routes.reversed().contains { $0.canMatch(path.path) }
+        self.routes.contains { $0.canMatch(path.path) }
+    }
+
+    /// Returns `true` if an alias exists, `false` otherwise.
+    ///
+    /// - note: This method doesn't check whether a specific context will return a path, or if that path can then be matched. You can, however, be certain that
+    ///         if this method returns `false` then `view(_:)` will return router's the 404 Not Found view.
+    public func canMatch<T>(_ alias: Alias<T>) -> Bool {
+        self.aliases.contains { $0.identifier == alias.identifier }
     }
 
     public func view(_ path: Path) -> AnyView {
@@ -476,6 +484,8 @@ extension Router {
         }
     }
 }
+
+// MARK: Debug methods
 
 @available(iOS 13.0, *)
 extension Router {
