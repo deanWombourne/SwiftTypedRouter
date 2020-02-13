@@ -345,7 +345,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftLint/swiftlint --config swiftlint.yml --path ..\n";
+			shellScript = "if [ -z \"$GITHUB_ACTIONS\" ]; then\n    $PODS_ROOT/SwiftLint/swiftlint --config swiftlint.yml --path ..\nfi\n";
 		};
 		A072AA6E23EACE020017E2EF /* Sourcery */ = {
 			isa = PBXShellScriptBuildPhase;
