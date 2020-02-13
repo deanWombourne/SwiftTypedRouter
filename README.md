@@ -1,5 +1,6 @@
 # SwiftTypedRouter
 
+
 ### Strongly typed routing for SwiftUI
 
 ![CI](https://github.com/deanWombourne/SwiftTypedRouter/workflows/CI/badge.svg?branch=master)
