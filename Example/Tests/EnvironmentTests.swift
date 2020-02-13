@@ -7,7 +7,10 @@
 //
 
 import Foundation
+
+#if os(iOS)
 import UIKit
+#endif
 
 import XCTest
 
@@ -15,7 +18,7 @@ import SwiftUI
 
 @testable import SwiftTypedRouter
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 private struct TestView: View {
 
     @Environment(\.router) var router
@@ -28,12 +31,12 @@ private struct TestView: View {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 private protocol TestViewDelegate: class {
     func hasRouter(_ view: TestView, router: Router)
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 private final class TestViewDelegateClass: TestViewDelegate {
     private(set) var router: Router?
 
@@ -42,7 +45,7 @@ private final class TestViewDelegateClass: TestViewDelegate {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 final class EnvironmentTests: XCTestCase {
 
     func testEnvironment_hasDefaultRouter() {
@@ -50,6 +53,7 @@ final class EnvironmentTests: XCTestCase {
         XCTAssertNotNil(view.router)
     }
 
+    #if os(iOS)
     func testEnvironment_canOverrideDefaultRouter() {
         let delegate = TestViewDelegateClass()
 
@@ -82,4 +86,5 @@ final class EnvironmentTests: XCTestCase {
         // Make the previous window key again
         UIApplication.shared.windows.dropLast().first?.makeKeyAndVisible()
     }
+    #endif
 }

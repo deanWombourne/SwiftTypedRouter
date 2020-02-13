@@ -3,7 +3,7 @@ import SwiftUI
 
 // MARK: - Router
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 public protocol RouterDelegate: class {
 
     func router(_ router: Router,
@@ -32,7 +32,7 @@ public protocol RouterDelegate: class {
 }
 
 /// Possible errors when matching against an `Alias`
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 public enum AliasMatchError: Error {
     /// An `Alias` with the supplied identifier was not found
     case notFound
@@ -43,7 +43,7 @@ public enum AliasMatchError: Error {
 
 // MARK: Initialisation
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 public class Router: CustomStringConvertible {
 
     internal private(set) var routes: [AnyRoute] = []
@@ -72,7 +72,7 @@ public class Router: CustomStringConvertible {
 
 // MARK: Routing
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension Router {
 
     /// Helper method to time an operation
@@ -179,7 +179,7 @@ extension Router {
 
 // MARK: Adding routes
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension Router {
 
     //swiftlint:disable line_length
@@ -298,7 +298,7 @@ extension Router {
 
 // MARK: Adding aliases
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension Router {
 
     /// Adds an `Alias` to the router.
@@ -327,7 +327,7 @@ extension Router {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 extension Router {
 
     struct AnyRoute: CustomStringConvertible {
@@ -480,7 +480,7 @@ extension Router {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension Router {
 
     struct AnyAlias: CustomStringConvertible {
@@ -518,7 +518,7 @@ extension Router {
 
 // MARK: Debug methods
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension Router {
 
     public var debugRoutes: String {

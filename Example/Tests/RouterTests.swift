@@ -14,6 +14,7 @@ import SwiftUI
 
 @testable import SwiftTypedRouter
 
+@available(iOS 13.0.0, macOS 10.15, *)
 func XCTAssertIsNotFoundView<V: View>(_ view: V,
                                       _ message: @escaping @autoclosure () -> String = "",
                                       file: StaticString = #file,
@@ -29,13 +30,18 @@ func XCTAssertIsNotFoundView<V: View>(_ view: V,
                   line: line)
 }
 
+@available(iOS 13.0.0, macOS 10.15, *)
 func XCTAssertFoundView<V: View>(_ view: V,
                                  _ message: @autoclosure () -> String = "View was NotFoundView",
                                  file: StaticString = #file,
                                  line: UInt = #line) {
-    XCTAssertFalse(String(describing: view).contains("SwiftTypedRouter.NotFoundView"), message, file: file, line: line)
+    XCTAssertFalse(String(describing: view).contains("SwiftTypedRouter.NotFoundView"),
+                   message(),
+                   file: file,
+                   line: line)
 }
 
+@available(iOS 13.0.0, macOS 10.15, *)
 class RouterTest: XCTestCase {
 
     fileprivate var router: Router!
@@ -53,6 +59,7 @@ class RouterTest: XCTestCase {
     }
 }
 
+@available(iOS 13.0.0, macOS 10.15, *)
 final class RouterTests: RouterTest {
 
     func testRouter_shouldCreateWithIdentifier() {
@@ -64,9 +71,9 @@ final class RouterTests: RouterTest {
         let router = Router()
         XCTAssertNil(router.identifier)
     }
-
 }
 
+@available(iOS 13.0.0, macOS 10.15, *)
 final class RouterCanMatchTests: RouterTest {
 
     func testRouter_canMatchShouldReturnTrue() {
@@ -89,6 +96,7 @@ final class RouterCanMatchTests: RouterTest {
     }
 }
 
+@available(iOS 13.0.0, macOS 10.15, *)
 final class RouterAliasMatchingTests: RouterTest {
 
     struct AliasContext {
@@ -119,6 +127,7 @@ final class RouterAliasMatchingTests: RouterTest {
 // swiftlint:disable line_length
 // swiftlint:disable type_body_length
 // swiftlint:disable identifier_name
+@available(iOS 13.0.0, macOS 10.15, *)
 final class RouterPathMatchingTests: RouterTest {
 
     func testRouter_wontMatchPaths() {

@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 public struct RouterKey: EnvironmentKey {
 
     public static let defaultValue: Router = Router()
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension EnvironmentValues {
 
     public var router: Router {
@@ -27,7 +27,7 @@ extension EnvironmentValues {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension View {
 
     public func withRouter(_ router: Router) -> some View {

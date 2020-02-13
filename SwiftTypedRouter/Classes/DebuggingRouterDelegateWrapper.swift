@@ -7,7 +7,7 @@
 
 import Foundation
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 public final class DebuggingRouterDelegateWrapper {
 
     let wrapping: RouterDelegate?
@@ -23,7 +23,7 @@ public final class DebuggingRouterDelegateWrapper {
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension DebuggingRouterDelegateWrapper: RouterDelegate {
 
     public func router(_ router: Router, willMatchPath path: Path) {

@@ -12,7 +12,7 @@ import SwiftUI
 
 @testable import SwiftTypedRouter
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 final class ViewTests: XCTestCase {
 
     func testView_willEraseToAnyView() {

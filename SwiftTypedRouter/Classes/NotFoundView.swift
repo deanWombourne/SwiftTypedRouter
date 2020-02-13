@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 13.0.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 struct NotFoundView: View {
 
     let title: AnyView
@@ -35,7 +35,7 @@ struct NotFoundView: View {
     }
 
     var body: some View {
-        ScrollView {
+        let scroll = ScrollView {
             VStack {
                 Group {
                     Text("404: Not Found").font(.largeTitle)
@@ -73,11 +73,16 @@ struct NotFoundView: View {
             }
             .padding()
         }
-        .navigationBarTitle("404: Not Found")
+
+        #if os(iOS)
+            return scroll.navigationBarTitle("404: Not Found")
+        #else
+            return scroll
+        #endif
     }
 }
 
-@available(iOS 13.0.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 struct NotFoundView_Previews: PreviewProvider {
 
     private static let router: Router = {
