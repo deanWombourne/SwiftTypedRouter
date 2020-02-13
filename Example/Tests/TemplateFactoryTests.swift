@@ -51,25 +51,31 @@ final class TemplateFactoryTests: XCTestCase {
         XCTAssertEqual(template.template, ":id")
     }
 
-    func testTemplateFactory_multiplePlaceholders() {
+    func testTemplateFactory_2Placeholders() {
         let template2 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .template()
         XCTAssertEqual(template2.template, "1/:p1/2/:p2")
+    }
 
+    func testTemplateFactory_3Placeholders() {
         let template3 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
             .template()
         XCTAssertEqual(template3.template, "1/:p1/2/:p2/3/:p3")
+    }
 
+    func testTemplateFactory_4Placeholders() {
         let template4 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
             .path("4").placeholder("p4", Int.self)
             .template()
         XCTAssertEqual(template4.template, "1/:p1/2/:p2/3/:p3/4/:p4")
+    }
 
+    func testTemplateFactory_5Placeholders() {
         let template5 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
@@ -77,7 +83,9 @@ final class TemplateFactoryTests: XCTestCase {
             .path("5").placeholder("p5", Int.self)
             .template()
         XCTAssertEqual(template5.template, "1/:p1/2/:p2/3/:p3/4/:p4/5/:p5")
+    }
 
+    func testTemplateFactory_6Placeholders() {
         let template6 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
@@ -86,7 +94,9 @@ final class TemplateFactoryTests: XCTestCase {
             .path("6").placeholder("p6", Int.self)
             .template()
         XCTAssertEqual(template6.template, "1/:p1/2/:p2/3/:p3/4/:p4/5/:p5/6/:p6")
+    }
 
+    func testTemplateFactory_7Placeholders() {
         let template7 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
@@ -96,7 +106,9 @@ final class TemplateFactoryTests: XCTestCase {
             .path("7").placeholder("p7", Int.self)
             .template()
         XCTAssertEqual(template7.template, "1/:p1/2/:p2/3/:p3/4/:p4/5/:p5/6/:p6/7/:p7")
+    }
 
+    func testTemplateFactory_8Placeholders() {
         let template8 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
@@ -107,7 +119,9 @@ final class TemplateFactoryTests: XCTestCase {
             .path("8").placeholder("p8", Int.self)
             .template()
         XCTAssertEqual(template8.template, "1/:p1/2/:p2/3/:p3/4/:p4/5/:p5/6/:p6/7/:p7/8/:p8")
+    }
 
+    func testTemplateFactory_9Placeholders() {
         let template9 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)
@@ -119,7 +133,9 @@ final class TemplateFactoryTests: XCTestCase {
             .path("9").placeholder("p9", Int.self)
             .template()
         XCTAssertEqual(template9.template, "1/:p1/2/:p2/3/:p3/4/:p4/5/:p5/6/:p6/7/:p7/8/:p8/9/:p9")
+    }
 
+    func testTemplateFactory_10Placeholders() {
         let template10 = factory.path("1").placeholder("p1", String.self)
             .path("2").placeholder("p2", Int.self)
             .path("3").placeholder("p3", Bool.self)

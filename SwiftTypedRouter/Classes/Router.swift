@@ -6,17 +6,29 @@ import SwiftUI
 @available(iOS 13.0, *)
 public protocol RouterDelegate: class {
 
-    func router(_ router: Router, willMatchPath path: Path)
+    func router(_ router: Router,
+                willMatchPath path: Path)
 
-    func router(_ router: Router, didMatchPath path: Path, duration: TimeInterval)
+    func router(_ router: Router,
+                didMatchPath path: Path,
+                duration: TimeInterval)
 
-    func router(_ router: Router, failedToMatchPath path: Path, duration: TimeInterval)
+    func router(_ router: Router,
+                failedToMatchPath path: Path,
+                duration: TimeInterval)
 
-    func router(_ router: Router, willMatchAliasWithIdentifier identifier: String)
+    func router(_ router: Router,
+                willMatchAliasWithIdentifier identifier: String)
 
-    func router(_ router: Router, didMatchAliasWithIdentifier identifier: String, forPath path: Path, duration: TimeInterval)
+    func router(_ router: Router,
+                didMatchAliasWithIdentifier identifier: String,
+                forPath path: Path,
+                duration: TimeInterval)
 
-    func router(_ router: Router, failedToMatchAliasWithIdentifier identifier: String, reason: AliasMatchError, duration: TimeInterval)
+    func router(_ router: Router,
+                failedToMatchAliasWithIdentifier identifier: String,
+                reason: AliasMatchError,
+                duration: TimeInterval)
 }
 
 /// Possible errors when matching against an `Alias`
@@ -40,7 +52,9 @@ public class Router: CustomStringConvertible {
 
     public weak var delegate: RouterDelegate?
 
-    /// A value used to identify this instance of `Router`. This is useful for debugging (it's included in the description when printed to the console).
+    /// A value used to identify this instance of `Router`. This is useful for debugging (it's included in the
+    /// description when printed to the console).
+    ///
     /// It's value doesn't affect the operation of the `Router` at all.
     public let identifier: String?
 
@@ -85,17 +99,19 @@ extension Router {
 
     /// Returns `true` if a path can be matched, `false` otherwise.
     ///
-    /// - note: Paradoxically, this doesn't guarantee that a path will return a view! The url might contain malformed data for the types expected, or the apply
-    ///         method might not return a view. In those cases, a 404 view will be returned. However, if this method returns `false` then `view(_:)` will
-    ///         definitely return the 404 not found view.
+    /// - note: Paradoxically, this doesn't guarantee that a path will return a view! The url might contain malformed
+    ///         data for the types expected, or the apply method might not return a view. In those cases, a 404 view
+    ///         will be returned. However, if this method returns `false` then `view(_:)` will definitely return the
+    ///         404 Not Found view.
     public func canMatch(_ path: Path) -> Bool {
         self.routes.contains { $0.canMatch(path.path) }
     }
 
     /// Returns `true` if an alias exists, `false` otherwise.
     ///
-    /// - note: This method doesn't check whether a specific context will return a path, or if that path can then be matched. You can, however, be certain that
-    ///         if this method returns `false` then `view(_:)` will return router's the 404 Not Found view.
+    /// - note: This method doesn't check whether a specific context will return a path, or if that path can then be
+    ///         matched. You can, however, be certain that if this method returns `false` then `view(_:)` will return
+    ///         the router's 404 Not Found view.
     public func canMatch<T>(_ alias: Alias<T>) -> Bool {
         self.aliases.contains { $0.identifier == alias.identifier }
     }
@@ -144,7 +160,10 @@ extension Router {
 
         switch result {
         case .failure(let reason):
-            self.delegate?.router(self, failedToMatchAliasWithIdentifier: identifier, reason: reason, duration: duration)
+            self.delegate?.router(self,
+                                  failedToMatchAliasWithIdentifier: identifier,
+                                  reason: reason,
+                                  duration: duration)
             return NotFoundView(alias: alias, router: self).eraseToAnyView()
         case .success(let path):
             self.delegate?.router(self, didMatchAliasWithIdentifier: identifier, forPath: path, duration: duration)
@@ -163,14 +182,15 @@ extension Router {
 @available(iOS 13.0, *)
 extension Router {
 
+    //swiftlint:disable line_length
 // sourcery:inline:auto:Router.Add
     // Generated add method for templates with 0 generic types
-    public func add<V: View>(_ template: Template.T0, action: @escaping () -> V)  {
+    public func add<V: View>(_ template: Template.T0, action: @escaping () -> V) {
         self.routes.append(AnyRoute(template: template, action: action))
     }
 
     // Generated add method for paths with 0 generic types
-    public func add<V: View>(path: String, action: @escaping () -> V)  {
+    public func add<V: View>(path: String, action: @escaping () -> V) {
         self.add(Template.T0(template: path), action: action)
     }
 
@@ -308,7 +328,7 @@ extension Router {
 
         // sourcery:inline:auto:Router.AnyRoute.Init
         // Generated init method for templates with 0 generic types
-        init<V: View>(template: Template.T0, action: @escaping () -> V)  {
+        init<V: View>(template: Template.T0, action: @escaping () -> V) {
             self.description = Self.createDescription(template: template.template, outputType: V.self)
             self.debugView = Self.createDebugView(template: template.template, outputType: V.self)
             self.canMatch = { template.matcher($0) != nil }
@@ -435,7 +455,7 @@ extension Router {
         }
 
         private static func createDebugView(template: String, outputType: Any.Type, args: Any.Type...) -> () -> AnyView {
-            {
+            return {
                 HStack {
                     Text(template)
                         .font(Font.body.weight(.semibold))

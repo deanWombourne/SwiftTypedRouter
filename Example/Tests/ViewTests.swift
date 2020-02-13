@@ -25,7 +25,8 @@ final class ViewTests: XCTestCase {
         let view = Text("This isn't AnyView")
         let erased = view.eraseToAnyView().eraseToAnyView().eraseToAnyView().eraseToAnyView().eraseToAnyView()
 
-        // The description of AnyView looks like AnyView(storage: SwiftUI.(unknown context at $7fff2c6a75a0).AnyViewStorage<SwiftUI.Text>)
+        // The description of AnyView looks like
+        // AnyView(storage: SwiftUI.(unknown context at $7fff2c6a75a0).AnyViewStorage<SwiftUI.Text>)
 
         // If we were nested AnyView we would have something like AnyViewStorage<AnyView> recursing down
         XCTAssertFalse(String(describing: erased).contains("AnyViewStorage<SwiftUI.AnyView"))

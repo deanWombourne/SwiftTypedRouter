@@ -48,6 +48,7 @@
 		A05B3DC823E8D91600D22E32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A05B3DCA23E8D92400D22E32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A05B3DD223E8DEC600D22E32 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		A0664D6D23F570CA001D56E6 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = swiftlint.yml; path = ../swiftlint.yml; sourceTree = "<group>"; };
 		A072AA6F23EAD0640017E2EF /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Templates; path = ../SwiftTypedRouter/Templates; sourceTree = "<group>"; };
 		A072AA7023EAD0C40017E2EF /* sourcery.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = sourcery.yml; sourceTree = "<group>"; };
 		A072AA7123EB0D630017E2EF /* ViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
@@ -163,6 +164,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				A0664D6D23F570CA001D56E6 /* swiftlint.yml */,
 				A072AA7023EAD0C40017E2EF /* sourcery.yml */,
 				B83A76D4D8241A06029B53CB /* SwiftTypedRouter.podspec */,
 				A2AD258E6FD2B2F5D5CD5331 /* README.md */,
@@ -196,6 +198,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				4918807C76A647EE962B59CC /* [CP] Embed Pods Frameworks */,
+				A0664D6E23F5710A001D56E6 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -325,6 +328,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftTypedRouter_Example/Pods-SwiftTypedRouter_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A0664D6E23F5710A001D56E6 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -z \"$GITHUB_ACTIONS\" ]; then\n    $PODS_ROOT/SwiftLint/swiftlint --config swiftlint.yml --path ..\nfi\n";
 		};
 		A072AA6E23EACE020017E2EF /* Sourcery */ = {
 			isa = PBXShellScriptBuildPhase;

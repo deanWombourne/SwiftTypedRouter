@@ -1,14 +1,17 @@
 PODS:
   - Sourcery (0.17.0)
+  - SwiftLint (0.39.1)
   - SwiftTypedRouter (0.1.0)
 
 DEPENDENCIES:
   - Sourcery (= 0.17.0)
+  - SwiftLint (~> 0.39.1)
   - SwiftTypedRouter (from `../`)
 
 SPEC REPOS:
   trunk:
     - Sourcery
+    - SwiftLint
 
 EXTERNAL SOURCES:
   SwiftTypedRouter:
@@ -16,8 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
-  SwiftTypedRouter: 85b43debd738a5d6018db7dd7b95b6fd1b1195c7
+  SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
+  SwiftTypedRouter: 6dc03369f0fc9ec0a20928f512dac6a44393f84f
 
-PODFILE CHECKSUM: 68a1d1f3f95b446146113d213d4ec1d558ab97ac
+PODFILE CHECKSUM: d5b05b2cecc179871d662d8436aba724edf54b5f
 
 COCOAPODS: 1.8.4

@@ -46,6 +46,7 @@ extension TemplateFactoryMake {
 
 extension TemplateFactory {
 
+    // swiftlint:disable:next type_name
     public final class FX: TemplateFactoryStart {
 
         public func placeholder<T: LosslessStringConvertible>(_ name: String, _ type: T.Type) -> F1<T> {
@@ -58,6 +59,8 @@ extension TemplateFactory {
         }
     }
 
+    // swiftlint:disable type_name
+    // swiftlint:disable line_length
     // sourcery:inline:auto:TemplateFactory.Subclasses
 
     // Generated factory subclass for templates with 0 generic types
@@ -156,4 +159,6 @@ extension TemplateFactory {
 
     }
     // sourcery:end
+    // swiftlint:enable type_name
+    // swiftlint:enable line_length
 }

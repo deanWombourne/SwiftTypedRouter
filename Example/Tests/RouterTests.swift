@@ -10,9 +10,14 @@ import Foundation
 import XCTest
 import SwiftUI
 
+// swiftlint:disable file_length
+
 @testable import SwiftTypedRouter
 
-func XCTAssertIsNotFoundView<V: View>(_ view: V, _ message: @escaping @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+func XCTAssertIsNotFoundView<V: View>(_ view: V,
+                                      _ message: @escaping @autoclosure () -> String = "",
+                                      file: StaticString = #file,
+                                      line: UInt = #line) {
     let message = { () -> String in
         let message = message()
         return message.isEmpty ? "View was not NotFoundView - found \(view) instead" : message
@@ -24,7 +29,10 @@ func XCTAssertIsNotFoundView<V: View>(_ view: V, _ message: @escaping @autoclosu
                   line: line)
 }
 
-func XCTAssertFoundView<V: View>(_ view: V, _ message: @autoclosure () -> String = "View was NotFoundView", file: StaticString = #file, line: UInt = #line) {
+func XCTAssertFoundView<V: View>(_ view: V,
+                                 _ message: @autoclosure () -> String = "View was NotFoundView",
+                                 file: StaticString = #file,
+                                 line: UInt = #line) {
     XCTAssertFalse(String(describing: view).contains("SwiftTypedRouter.NotFoundView"), message, file: file, line: line)
 }
 
@@ -62,7 +70,7 @@ final class RouterTests: RouterTest {
 final class RouterCanMatchTests: RouterTest {
 
     func testRouter_canMatchShouldReturnTrue() {
-        router.add(path: "a/b/:c") { (value: String) -> EmptyView in
+        router.add(path: "a/b/:c") { (_: String) -> EmptyView in
             EmptyView()
         }
 
@@ -71,7 +79,7 @@ final class RouterCanMatchTests: RouterTest {
     }
 
     func testRouter_canMatchShouldReturnFalse() {
-        router.add(path: "a/b/:c") { (value: String) -> EmptyView in
+        router.add(path: "a/b/:c") { (_: String) -> EmptyView in
             EmptyView()
         }
 
@@ -108,6 +116,9 @@ final class RouterAliasMatchingTests: RouterTest {
     }
 }
 
+// swiftlint:disable line_length
+// swiftlint:disable type_body_length
+// swiftlint:disable identifier_name
 final class RouterPathMatchingTests: RouterTest {
 
     func testRouter_wontMatchPaths() {
@@ -129,7 +140,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath1() {
-        var matched: String? = nil
+        var matched: String?
 
         router.add(path: "path/:p1") { (matched1: String) -> EmptyView in
             matched = matched1
@@ -142,7 +153,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath2() {
-        var matched: (String, String)? = nil
+        var matched: (String, String)?
 
         router.add(path: "path/:p1/:p2") { (m1: String, m2: String) -> EmptyView in
             matched = (m1, m2)
@@ -156,7 +167,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath3() {
-        var matched: (String, String, String)? = nil
+        var matched: (String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3") { (m1: String, m2: String, m3: String) -> EmptyView in
             matched = (m1, m2, m3)
@@ -171,7 +182,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath4() {
-        var matched: (String, String, String, String)? = nil
+        var matched: (String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4") { (m1: String, m2: String, m3: String, m4: String) -> EmptyView in
             matched = (m1, m2, m3, m4)
@@ -187,7 +198,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath5() {
-        var matched: (String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4/:p5") { (m1: String, m2: String, m3: String, m4: String, m5: String) -> EmptyView in
             matched = (m1, m2, m3, m4, m5)
@@ -204,7 +215,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath6() {
-        var matched: (String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4/:p5/:p6") { (m1: String, m2: String, m3: String, m4: String, m5: String, m6: String) -> EmptyView in
             matched = (m1, m2, m3, m4, m5, m6)
@@ -222,7 +233,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath7() {
-        var matched: (String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4/:p5/:p6/:p7") { (m1: String, m2: String, m3: String, m4: String, m5: String, m6: String, m7: String) -> EmptyView in
             matched = (m1, m2, m3, m4, m5, m6, m7)
@@ -241,7 +252,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath8() {
-        var matched: (String, String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8") { (m1: String, m2: String, m3: String, m4: String, m5: String, m6: String, m7: String, m8: String) -> EmptyView in
             matched = (m1, m2, m3, m4, m5, m6, m7, m8)
@@ -261,7 +272,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath9() {
-        var matched: (String, String, String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8/:p9") { (m1: String, m2: String, m3: String, m4: String, m5: String, m6: String, m7: String, m8: String, m9: String) -> EmptyView in
             matched = (m1, m2, m3, m4, m5, m6, m7, m8, m9)
@@ -282,7 +293,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchPlaceholderPath10() {
-        var matched: (String, String, String, String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String, String, String, String)?
 
         router.add(path: "path/:p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8/:p9/:p10") { (m1: String, m2: String, m3: String, m4: String, m5: String, m6: String, m7: String, m8: String, m9: String, m10: String) -> EmptyView in
             matched = (m1, m2, m3, m4, m5, m6, m7, m8, m9, m10)
@@ -319,7 +330,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate1() {
-        var matched: String? = nil
+        var matched: String?
 
         let template = Template.T1<String>(template: ":p1")
 
@@ -334,7 +345,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate2() {
-        var matched: (String, String)? = nil
+        var matched: (String, String)?
 
         let template = Template.T2<String, String>(template: ":p1/:p2")
 
@@ -350,7 +361,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate3() {
-        var matched: (String, String, String)? = nil
+        var matched: (String, String, String)?
 
         let template = Template.T3<String, String, String>(template: ":p1/:p2/:p3")
 
@@ -367,7 +378,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate4() {
-        var matched: (String, String, String, String)? = nil
+        var matched: (String, String, String, String)?
 
         let template = Template.T4<String, String, String, String>(template: ":p1/:p2/:p3/:p4")
 
@@ -385,7 +396,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate5() {
-        var matched: (String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String)?
 
         let template = Template.T5<String, String, String, String, String>(template: ":p1/:p2/:p3/:p4/:p5")
 
@@ -404,7 +415,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate6() {
-        var matched: (String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String)?
 
         let template = Template.T6<String, String, String, String, String, String>(template: ":p1/:p2/:p3/:p4/:p5/:p6")
 
@@ -424,7 +435,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate7() {
-        var matched: (String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String)?
 
         let template = Template.T7<String, String, String, String, String, String, String>(template: ":p1/:p2/:p3/:p4/:p5/:p6/:p7")
 
@@ -445,7 +456,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate8() {
-        var matched: (String, String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String, String)?
 
         let template = Template.T8<String, String, String, String, String, String, String, String>(template: ":p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8")
 
@@ -467,7 +478,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate9() {
-        var matched: (String, String, String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String, String, String)?
 
         let template = Template.T9<String, String, String, String, String, String, String, String, String>(template: ":p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8/:p9")
 
@@ -490,7 +501,7 @@ final class RouterPathMatchingTests: RouterTest {
     }
 
     func testRouter_shouldMatchTemplate10() {
-        var matched: (String, String, String, String, String, String, String, String, String, String)? = nil
+        var matched: (String, String, String, String, String, String, String, String, String, String)?
 
         let template = Template.T10<String, String, String, String, String, String, String, String, String, String>(template: ":p1/:p2/:p3/:p4/:p5/:p6/:p7/:p8/:p9/:p10")
 

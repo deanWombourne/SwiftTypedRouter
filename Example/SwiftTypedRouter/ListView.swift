@@ -9,8 +9,10 @@
 import Foundation
 import SwiftUI
 
+//swiftlint:disable duplicate_imports
 import struct SwiftTypedRouter.Path
 import SwiftTypedRouter
+//swiftlint:enable duplicate_imports
 
 extension Template {
 
@@ -27,7 +29,7 @@ struct ListView: View {
     let clients = nameList
 
     var body: some View {
-        List(self.clients, id:\.self) {
+        List(self.clients, id: \.self) {
             ListCell(client: $0)
         }.navigationBarTitle("Client List")
     }
