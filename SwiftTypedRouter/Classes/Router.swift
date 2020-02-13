@@ -301,6 +301,14 @@ extension Router {
 @available(iOS 13.0, *)
 extension Router {
 
+    /// Adds an `Alias` to the router.
+    ///
+    /// There can only even be one alias mapped to an identifier, so any other aliases with this identifier are
+    /// replaced.
+    ///
+    /// - parameter alias: The alias to add
+    /// - parameter apply: The block called when the alias is to be converted to a Path, given an instance of it's
+    ///                    context type
     public func alias<C>(_ alias: Alias<C>, apply: @escaping (C) -> Path?) {
         if let index = self.aliases.firstIndex(where: { $0.identifier == alias.identifier }) {
             aliases.remove(at: index)
@@ -308,11 +316,14 @@ extension Router {
         self.aliases.append(AnyAlias(alias, apply))
     }
 
+    /// Helper method to add instances of `Alias<Void>` - if the context is void then it's nice not to have to pass
+    /// that parameter.
+    ///
+    /// - note: This method just wraps `Router.alias(_:apply:)`
+    ///
+    /// - parameter alias: The alias to add
     public func alias(_ alias: Alias<Void>, apply: @escaping () -> Path?) {
-        if let index = self.aliases.firstIndex(where: { $0.identifier == alias.identifier }) {
-            aliases.remove(at: index)
-        }
-        self.aliases.append(AnyAlias(alias, { _ in apply() }))
+        self.alias(alias) { _ in apply() }
     }
 }
 
