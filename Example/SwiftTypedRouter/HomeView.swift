@@ -13,7 +13,7 @@ import SwiftTypedRouter
 let homeButtonTapAlias = Alias<Void>("home.button.tap")
 let notFoundAlias = Alias<Void>("this.is.not.a.valid.alias")
 
-struct HomeView: View  {
+struct HomeView: View {
 
     @Environment(\.router) var router
 
