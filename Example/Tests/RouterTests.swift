@@ -12,6 +12,22 @@ import SwiftUI
 
 @testable import SwiftTypedRouter
 
+func XCTAssertIsNotFoundView<V: View>(_ view: V, _ message: @escaping @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+    let message = { () -> String in
+        let message = message()
+        return message.isEmpty ? "View was not NotFoundView - found \(view) instead" : message
+    }
+
+    XCTAssertTrue(String(describing: view).contains("SwiftTypedRouter.NotFoundView"),
+                  message(),
+                  file: file,
+                  line: line)
+}
+
+func XCTAssertFoundView<V: View>(_ view: V, _ message: @autoclosure () -> String = "View was NotFoundView", file: StaticString = #file, line: UInt = #line) {
+    XCTAssertFalse(String(describing: view).contains("SwiftTypedRouter.NotFoundView"), message, file: file, line: line)
+}
+
 class RouterTest: XCTestCase {
 
     fileprivate var router: Router!
@@ -19,7 +35,7 @@ class RouterTest: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        self.router = Router(identifier: "TestRouter" + UUID().uuidString)
+        self.router = Router(identifier: "TestRouter-" + UUID().uuidString)
     }
 
     override func tearDown() {
@@ -65,10 +81,45 @@ final class RouterCanMatchTests: RouterTest {
     }
 }
 
+final class RouterAliasMatchingTests: RouterTest {
+
+    struct AliasContext {
+        let value: String
+    }
+
+    func testRouter_matchesAliasWithContextToValidPath() {
+        let alias = Alias<AliasContext>("alias.home")
+
+        router.add(path: "home") { EmptyView() }
+
+        router.alias(alias) { context in Path(context.value) }
+
+        XCTAssertFoundView(router.view(alias, context: AliasContext(value: "home")))
+    }
+
+    func testRouter_matchesAliasWithContextToInvalidPath() {
+        let alias = Alias<AliasContext>("alias.home")
+
+        router.add(path: "home") { EmptyView() }
+
+        router.alias(alias) { context in Path(context.value) }
+
+        XCTAssertIsNotFoundView(router.view(alias, context: AliasContext(value: "not-home")))
+    }
+}
+
 final class RouterPathMatchingTests: RouterTest {
 
+    func testRouter_wontMatchPaths() {
+        router.add(path: "hello/this/is/a/path") { EmptyView() }
+
+        XCTAssertIsNotFoundView(router.view("hello/this/is/a/pat"))
+        XCTAssertIsNotFoundView(router.view("hello/this/is/a/"))
+        XCTAssertIsNotFoundView(router.view("ello/this/is/a/path"))
+        XCTAssertIsNotFoundView(router.view("oh-hello/this/is/a/path"))
+    }
+
     func testRouter_shouldMatchSimplePath() {
-        let router = Router()
         var matched = false
         router.add(path: "home") { () -> EmptyView in matched = true; return EmptyView() }
 

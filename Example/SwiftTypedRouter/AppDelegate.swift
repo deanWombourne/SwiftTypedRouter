@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-// MARK: - Examples of Router usage
+// MARK: - Examples of Router usage (SwiftUI)
 
 func routerExamples() {
 
