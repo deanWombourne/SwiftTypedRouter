@@ -14,6 +14,7 @@
 		A05B3DC923E8D91600D22E32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DC823E8D91600D22E32 /* SceneDelegate.swift */; };
 		A05B3DCB23E8D92400D22E32 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DCA23E8D92400D22E32 /* HomeView.swift */; };
 		A05B3DD423E8E3F500D22E32 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B3DD223E8DEC600D22E32 /* ListView.swift */; };
+		A0664D7023F585B9001D56E6 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0664D6F23F581C3001D56E6 /* Package.swift */; };
 		A072AA7323EB0D9F0017E2EF /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7123EB0D630017E2EF /* ViewTests.swift */; };
 		A072AA7923EB14870017E2EF /* AliasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7723EB14850017E2EF /* AliasTests.swift */; };
 		A072AA7B23EB14EF0017E2EF /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072AA7A23EB14EF0017E2EF /* EnvironmentTests.swift */; };
@@ -398,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A05B3DD423E8E3F500D22E32 /* ListView.swift in Sources */,
+				A0664D7023F585B9001D56E6 /* Package.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				A05B3DCB23E8D92400D22E32 /* HomeView.swift in Sources */,
 				A05B3DC923E8D91600D22E32 /* SceneDelegate.swift in Sources */,
