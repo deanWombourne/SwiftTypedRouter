@@ -47,7 +47,9 @@ public class Template {
         }
 
         return { candidate in
-            let matches = expression.matches(in: candidate, options: [ ], range: NSRange(location: 0, length: candidate.count))
+            let matches = expression.matches(in: candidate,
+                                             options: [ ],
+                                             range: NSRange(location: 0, length: candidate.count))
             guard let match = matches.first else { return nil }
 
             return (1..<match.numberOfRanges)
@@ -89,11 +91,17 @@ public class Template {
 
 extension Template {
 
+    // swiftlint:disable type_name
+    // swiftlint:disable identifier_name
+    // swiftlint:disable function_parameter_count
+    // swiftlint:disable large_tuple
+    // swiftlint:disable line_length
+    // swiftlint:disable cyclomatic_complexity
     // sourcery:inline:auto:Template.Subclasses
 
     // Generated template subclass for templates with 0 generic types
     public final class T0: Template, FactoryTemplate {
-        let matcher: (String) -> ()?
+        let matcher: (String) -> Void?
 
         override public init(template: String) {
             let baseMatcher = Self.createBaseMatcher(path: template)
@@ -366,4 +374,10 @@ extension Template {
         }
     }
     // sourcery:end
+    // swiftlint:enable type_name
+    // swiftlint:enable identifier_name
+    // swiftlint:enable function_parameter_count
+    // swiftlint:enable large_tuple
+    // swiftlint:enable line_length
+    // swiftlint:enable cyclomatic_complexity
 }

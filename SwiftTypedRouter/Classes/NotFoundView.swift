@@ -47,7 +47,11 @@ struct NotFoundView: View {
                     spacer(10)
                     ForEach(router.routes, id: \.description) {
                         $0.debugView()
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity,
+                                   alignment: .topLeading)
                             .padding(.horizontal)
                     }
                 }
@@ -57,7 +61,11 @@ struct NotFoundView: View {
                     spacer(10)
                     ForEach(router.aliases, id: \.identifier) {
                         $0.debugView()
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                            .frame(minWidth: 0,
+                                   maxWidth: .infinity,
+                                   minHeight: 0,
+                                   maxHeight: .infinity,
+                                   alignment: .topLeading)
                             .padding(.horizontal)
                     }
                 }
@@ -75,7 +83,7 @@ struct NotFoundView_Previews: PreviewProvider {
     private static let router: Router = {
         let router = Router()
         router.add(path: "home", action: { Text("Sigh") })
-        router.add(path: "product/details/:id", action: { (id: String) in Text("Sigh") })
+        router.add(path: "product/details/:id", action: { (_: String) in Text("Sigh") })
         router.alias(Alias<Void>("prodcut/detalis/:id")) { "" }
         return router
     }()

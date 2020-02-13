@@ -10,14 +10,16 @@ import UIKit
 
 import SwiftUI
 
+//swiftlint:disable duplicate_imports
 import struct SwiftTypedRouter.Path
 import SwiftTypedRouter
-
+//swiftlint:enable duplicate_imports
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         //routerExamples()
 
@@ -26,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: UISceneSession Lifecycle
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(_ application: UIApplication,
+                     configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
@@ -87,10 +91,12 @@ func routerExamples() {
     print(router.canMatch("product/details/0"))
 }
 
-
 // The template for product details, define this in the product details view's file :)
 extension Template {
-    static let productDetails = TemplateFactory.start().path("product", "details").placeholder("id", String.self).template()
+    static let productDetails = TemplateFactory.start()
+        .path("product", "details")
+        .placeholder("id", String.self)
+        .template()
 
     static let addProduct = TemplateFactory.start().path("product", "add").template()
 }
@@ -99,7 +105,6 @@ extension Path {
 
     static func productDetails(id: String) -> Path { Template.productDetails.path(id) }
 }
-
 
 // Create aliases
 

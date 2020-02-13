@@ -1,0 +1,15 @@
+disabled_rules:
+    - file_length
+
+included:
+  - SwiftTypedRouter/Classes
+  - Example
+
+excluded:
+
+identifier_name:
+  excluded:
+    - id
+
+nesting:
+  type_level: 2
