@@ -49,6 +49,7 @@
 		A05B3DCA23E8D92400D22E32 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A05B3DD223E8DEC600D22E32 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		A0664D6D23F570CA001D56E6 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = swiftlint.yml; path = ../swiftlint.yml; sourceTree = "<group>"; };
+		A0664D6F23F581C3001D56E6 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		A072AA6F23EAD0640017E2EF /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Templates; path = ../SwiftTypedRouter/Templates; sourceTree = "<group>"; };
 		A072AA7023EAD0C40017E2EF /* sourcery.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = sourcery.yml; sourceTree = "<group>"; };
 		A072AA7123EB0D630017E2EF /* ViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				A0664D6F23F581C3001D56E6 /* Package.swift */,
 				A0664D6D23F570CA001D56E6 /* swiftlint.yml */,
 				A072AA7023EAD0C40017E2EF /* sourcery.yml */,
 				B83A76D4D8241A06029B53CB /* SwiftTypedRouter.podspec */,

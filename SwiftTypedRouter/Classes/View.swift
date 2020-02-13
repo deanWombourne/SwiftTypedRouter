@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 13.0.0, macOS 10.15, *)
 extension View {
 
     func eraseToAnyView() -> AnyView {
