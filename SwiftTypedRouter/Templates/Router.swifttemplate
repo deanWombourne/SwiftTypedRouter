@@ -116,6 +116,8 @@ let matcherReturnType = { () -> String in
     let ret = parameters.typesString
     return ret.isEmpty ? "Void" : "(\(ret))"
 }()
+
+let typesParameterValue = parameters.types.map { $0 + ".self" }.joined(separator: ", ").mapIfNotEmpty { ", types: " + $0 }
 -%>
 
 // Generated template subclass for templates with <%= parameters.count -%> generic types
@@ -123,7 +125,7 @@ public final class T<%= parameters.count -%><%= generics -%>: Template, FactoryT
     let matcher: (String) -> <%= matcherReturnType -%>?
 
     override public init(template: String) {
-        let baseMatcher = Self.createBaseMatcher(path: template)
+        let baseMatcher = Self.createBaseMatcher(path: template<%= typesParameterValue -%>)
         self.matcher = {
             guard let matches = baseMatcher($0) else { return nil }
             guard matches.count >= <%= parameters.count -%> else { return nil }

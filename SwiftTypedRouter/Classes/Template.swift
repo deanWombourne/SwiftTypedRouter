@@ -21,18 +21,24 @@ public class Template {
         self.template = template
     }
 
-    fileprivate static func createMatcherExpression(path: String) -> NSRegularExpression? {
+    private static func createMatcherExpression(path: String, types: [Any.Type]) -> NSRegularExpression? {
+        var types = types
+
         let comps = path
             .split(separator: "/")
             .map { (component: Substring) -> Substring in
                 guard component.hasPrefix(":") else { return component }
-                return "([\\w]+)"
+
+                // Get the next type - and if there aren't enough just match any word character
+                let match = (types.remove(at: 0) as? TemplateRegexMatchable.Type)?.regexMatch ?? "[\\w]+"
+
+                return "(" + match + ")"
         }
 
         do {
             let expression = try NSRegularExpression(pattern: "^" + comps.joined(separator: "/"),
                                                      options: [ .caseInsensitive ])
-            //print("Generated expression \(expression) from \(path)")
+            //print("Generated expression \(expression.pattern) from \(path)")
             return expression
         } catch {
             print("WARNING Could not create matcher expression from ", path)
@@ -41,8 +47,8 @@ public class Template {
         }
     }
 
-    fileprivate static func createBaseMatcher(path: String) -> (String) -> [String]? {
-        guard let expression = createMatcherExpression(path: path) else {
+    fileprivate static func createBaseMatcher(path: String, types: Any.Type...) -> (String) -> [String]? {
+        guard let expression = createMatcherExpression(path: path, types: types) else {
             return { _ in return nil }
         }
 
@@ -124,7 +130,7 @@ extension Template {
         let matcher: (String) -> (A)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 1 else { return nil }
@@ -145,7 +151,7 @@ extension Template {
         let matcher: (String) -> (A, B)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 2 else { return nil }
@@ -167,7 +173,7 @@ extension Template {
         let matcher: (String) -> (A, B, C)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 3 else { return nil }
@@ -190,7 +196,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 4 else { return nil }
@@ -214,7 +220,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D, E)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self, E.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 5 else { return nil }
@@ -239,7 +245,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D, E, F)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self, E.self, F.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 6 else { return nil }
@@ -265,7 +271,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D, E, F, G)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self, E.self, F.self, G.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 7 else { return nil }
@@ -292,7 +298,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D, E, F, G, H)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 8 else { return nil }
@@ -320,7 +326,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D, E, F, G, H, I)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 9 else { return nil }
@@ -349,7 +355,7 @@ extension Template {
         let matcher: (String) -> (A, B, C, D, E, F, G, H, I, J)?
 
         override public init(template: String) {
-            let baseMatcher = Self.createBaseMatcher(path: template)
+            let baseMatcher = Self.createBaseMatcher(path: template, types: A.self, B.self, C.self, D.self, E.self, F.self, G.self, H.self, I.self, J.self)
             self.matcher = {
                 guard let matches = baseMatcher($0) else { return nil }
                 guard matches.count >= 10 else { return nil }

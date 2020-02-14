@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Represents a path to be passed into a Router.
+///
+/// Essentially a typesafe wrapper around `String`.
 public struct Path: Hashable {
 
     public let path: String
