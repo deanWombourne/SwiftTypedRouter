@@ -116,6 +116,10 @@ extension Router {
         self.aliases.contains { $0.identifier == alias.identifier }
     }
 
+    /// Returns a view for a given path
+    ///
+    /// - note: If the path doesn't match a known path (or it's action doesn't return a valid view) then the router will
+    ///         return  404 Not Found view with some debugging information.
     public func view(_ path: Path) -> AnyView {
         self.delegate?.router(self, willMatchPath: path)
 
@@ -124,7 +128,6 @@ extension Router {
         }
 
         guard let match = potentialMatch else {
-            print("[Router] Failed to match path '\(path)'")
             self.delegate?.router(self, failedToMatchPath: path, duration: duration)
             return NotFoundView(path: path, router: self).eraseToAnyView()
         }
@@ -136,11 +139,15 @@ extension Router {
 
     /// Wrapper around `view(_:Path)` to accept `String`s
     ///
-    /// Even though Path is `StringLiteralConvertable`, we also want `router.view("a/b/"+id)` to work.
+    /// Even though Path is `StringLiteralConvertable`, we also want code like `router.view("a/b/"+id)` to work.
     public func view(_ string: String) -> AnyView {
         self.view(Path(string))
     }
 
+    /// Return a view from the given alias/context combination.
+    ///
+    /// - note: This will return the 404 Not Found view if the alias can't be found, or it's apply method doesn't return
+    ///         a valid path, or the valid path isn't found.
     public func view<C>(_ alias: Alias<C>, context: C) -> AnyView {
         let identifier = alias.identifier
 
