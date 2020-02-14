@@ -124,6 +124,37 @@ final class RouterAliasMatchingTests: RouterTest {
     }
 }
 
+@available(iOS 13.0.0, macOS 10.15, *)
+final class RouterPathTypeMatchingTests: RouterTest {
+
+    func testRouter_matchesPathsWithIntAndInt() {
+        router.add(path: "hi/:id") { (_: Int) in EmptyView() }
+
+        XCTAssertFoundView(router.view("hi/1"))
+    }
+
+    func testRouter_wontMatchPathsWithIntAndString() {
+        router.add(path: "hi/:id") { (_: Int) in EmptyView() }
+
+        XCTAssertIsNotFoundView(router.view("hi/world"))
+    }
+
+    func testRouter_matchesPathsWithDoubleAndInt() {
+        router.add(path: "hi/:id") { (_: Double) in EmptyView() }
+
+        XCTAssertFoundView(router.view("hi/1"))
+        XCTAssertFoundView(router.view("hi/1.2"))
+        XCTAssertFoundView(router.view("hi/-1.2"))
+        XCTAssertFoundView(router.view("hi/-1.2e4"))
+    }
+
+    func testRouter_wontMatchPathsWithDoubleAndString() {
+        router.add(path: "hi/:id") { (_: Double) in EmptyView() }
+
+        XCTAssertIsNotFoundView(router.view("hi/world"))
+    }
+}
+
 // swiftlint:disable line_length
 // swiftlint:disable type_body_length
 // swiftlint:disable identifier_name

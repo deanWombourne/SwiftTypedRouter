@@ -38,7 +38,7 @@ public class Template {
         do {
             let expression = try NSRegularExpression(pattern: "^" + comps.joined(separator: "/"),
                                                      options: [ .caseInsensitive ])
-            //print("Generated expression \(expression.pattern) from \(path)")
+            print("Generated expression \(expression.pattern) from \(path)")
             return expression
         } catch {
             print("WARNING Could not create matcher expression from ", path)
