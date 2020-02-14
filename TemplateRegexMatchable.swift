@@ -25,10 +25,10 @@ extension UInt: TemplateRegexMatchable {
 
 extension Float: TemplateRegexMatchable {
 
-    static var regexMatch: String { "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?" }
+    static var regexMatch: String { "[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?" }
 }
 
 extension Double: TemplateRegexMatchable {
 
-    static var regexMatch: String { "[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?" }
+    static var regexMatch: String { "[-+]?[0-9]*\\.?[0-9]+(?:[eE][-+]?[0-9]+)?" }
 }
