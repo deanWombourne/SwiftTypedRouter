@@ -153,6 +153,12 @@ final class RouterPathTypeMatchingTests: RouterTest {
 
         XCTAssertIsNotFoundView(router.view("hi/world"))
     }
+
+    func testRouter_shouldMatchPathWithLeadingSlash() {
+        router.add(path: "/a/path") { EmptyView() }
+
+        XCTAssertFoundView(router.view("/a/path"))
+    }
 }
 
 // swiftlint:disable line_length

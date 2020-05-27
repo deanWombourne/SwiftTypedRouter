@@ -24,6 +24,9 @@ public class Template {
     private static func createMatcherExpression(path: String, types: [Any.Type]) -> NSRegularExpression? {
         var types = types
 
+        // We need to prepend a leading slash if there is one in the original path
+        let hasLeadingPath = path.hasPrefix("/")
+
         let comps = path
             .split(separator: "/")
             .map { (component: Substring) -> Substring in
@@ -35,8 +38,14 @@ public class Template {
                 return "(" + match + ")"
         }
 
+        // Rejoin them
+        var substitutedPath = comps.joined(separator: "/")
+        if hasLeadingPath {
+            substitutedPath = "/" + substitutedPath
+        }
+
         do {
-            let expression = try NSRegularExpression(pattern: "^" + comps.joined(separator: "/"),
+            let expression = try NSRegularExpression(pattern: "^" + substitutedPath,
                                                      options: [ .caseInsensitive ])
             print("Generated expression \(expression.pattern) from \(path)")
             return expression
