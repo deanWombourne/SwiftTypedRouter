@@ -124,7 +124,7 @@ extension Router {
         self.delegate?.router(self, willMatchPath: path)
 
         let (potentialMatch, duration) = time {
-            self.routes.reversed().lazy.compactMap({ $0.matches(path.path) }).first
+            self.routes.lazy.reversed().compactMap({ $0.matches(path.path) }).first
         }
 
         guard let match = potentialMatch else {
