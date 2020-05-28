@@ -66,7 +66,7 @@ public class Router: CustomStringConvertible {
     }
 
     public var description: String {
-        self.identifier.map { "Router(\($0))" } ?? "Router"
+        self.identifier.map { "Router(\($0))" } ?? "Router()"
     }
 }
 
