@@ -119,7 +119,7 @@ extension Router {
     /// Returns a view for a given path
     ///
     /// - note: If the path doesn't match a known path (or it's action doesn't return a valid view) then the router will
-    ///         return  404 Not Found view with some debugging information.
+    ///         return 404 Not Found view with some debugging information.
     public func view(_ path: Path) -> AnyView {
         self.delegate?.router(self, willMatchPath: path)
 
